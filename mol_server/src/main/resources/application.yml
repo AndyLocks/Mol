@@ -1,0 +1,16 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  application:
+    name: mol_server
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: abobaaboba
+
+logging:
+  level:
+    root: info

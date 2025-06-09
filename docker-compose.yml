@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  graphdb:
+    image: neo4j
+    volumes:
+        - /$HOME/neo4j/logs:/logs
+        - /$HOME/neo4j/config:/config
+        - /$HOME/neo4j/data:/data
+        - /$HOME/neo4j/plugins:/plugins
+    environment:
+        - NEO4J_AUTH=neo4j/abobaaboba
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    restart: always
+
+  mol-server:
+    container_name: mol-server
+    restart: always
+    build:
+      context: ./mol_server/
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_NEO4J_URI=bolt://graphdb:7687
+    depends_on:
+      - graphdb
