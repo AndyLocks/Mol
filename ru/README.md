@@ -130,7 +130,7 @@ curl -X GET http://localhost:8080/reagents\?asText\=true -d 'HCl'
 
 После запуска на локальной машине вы можете посмотреть визуализацию графа перейдя по ссылке: http://localhost:7474. На этом порту открыт neo4j. Вот пример возможного вывода:
 
-![[../images/graph.png]]
+![graph](../images/graph.png)
 
 ## CLI
 

@@ -132,7 +132,7 @@ In allen Fällen zeigt der Parameter asText bei true die Antwort als Text an. Is
 
 Nach dem Start des Servers kannst du den Reaktionsgraphen lokal im Browser unter http://localhost:7474 ansehen. Dieser Port gehört zur Standardoberfläche von neo4j. Ein Beispiel für die Visualisierung:
 
-![[../images/graph.png]]
+![graph](../images/graph.png)
 
 ---
 

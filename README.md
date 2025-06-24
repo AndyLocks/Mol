@@ -130,7 +130,7 @@ In all cases, if the asText parameter is true, the output is shown as readable t
 
 Once the server is running locally, you can view the reaction graph by navigating to http://localhost:7474. This is the default port for neo4j. Example output:
 
-![[./images/graph.png]]
+![graph](./images/graph.png)
 
 ---
 
