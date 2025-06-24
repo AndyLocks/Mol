@@ -17,7 +17,8 @@ public record Molecule(String name, List<Atoms> atoms) {
     }
 
     public static Map<Atoms, Integer> listToMap(List<Atoms> atoms) {
-        return atoms.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.reducing(0, e -> 1, Integer::sum)));
+        return atoms.stream()
+                .collect(Collectors.groupingBy(Function.identity(), () -> new EnumMap<>(Atoms.class), Collectors.reducing(0, e -> 1, Integer::sum)));
     }
 
     public static Molecule of(final String name, List<Atoms> atoms) {
