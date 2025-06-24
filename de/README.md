@@ -2,6 +2,7 @@
 [![neo4j](https://img.shields.io/badge/neo4j-89b4fa?style=for-the-badge&logo=neo4j&logoColor=cdd6f4&labelColor=1e1e2e)](https://neo4j.com/)
 
 [**Documentation is also available in Russian!!!**](../ru/README.md)
+
 [**Documentation is also available in English!!!**](../README.md)
 
 ---
