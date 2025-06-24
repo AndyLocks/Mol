@@ -152,4 +152,4 @@ Das CLI befindet sich noch in der Entwicklung, ist aber bereits einsatzbereit. E
 ./mol import ./example.mol
 ```
 
-Das CLI befindet sich im Verzeichnis mol\_cli.
+Das CLI befindet sich im Verzeichnis `mol_cli`.
