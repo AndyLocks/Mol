@@ -150,4 +150,4 @@ The CLI is still under development, but already functional. It simplifies usage 
 ./mol import ./example.mol
 ```
 
-Located in the `molcli` directory.
+Located in the `mol_cli` directory.
