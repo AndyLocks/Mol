@@ -93,7 +93,7 @@ Ausgabe:
 [H2, Cl2] -> HCl
 ```
 
-In allen Fällen zeigt der Parameter asText bei true die Antwort als Text an. Ist er false oder nicht gesetzt, wird das Ergebnis als JSON zurückgegeben:
+In allen Fällen zeigt der Parameter `asText` bei `true` die Antwort als Text an. Ist er `false` oder nicht gesetzt, wird das Ergebnis als JSON zurückgegeben:
 
 ```json
 [

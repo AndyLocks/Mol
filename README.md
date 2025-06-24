@@ -91,7 +91,7 @@ Output:
 [H2, Cl2] -> HCl
 ```
 
-In all cases, if the asText parameter is true, the output is shown as readable text. If false or omitted, the response is returned as JSON:
+In all cases, if the `asText` parameter is `true`, the output is shown as readable text. If `false` or omitted, the response is returned as JSON:
 
 ```json
 [
