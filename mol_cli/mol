@@ -1,5 +1,4 @@
 #!/bin/env python
-#!/home/illia/python_env/bin/python
 
 import typer
 import requests
