@@ -3,7 +3,7 @@
 
 [**Documentation is also available in English!!!**](../README.md)
 
-[**Documentation is also available in German!!!**](de/README.md)
+[**Documentation is also available in German!!!**](../de/README.md)
 
 ---
 
