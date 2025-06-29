@@ -7,13 +7,13 @@ use reqwest::Client;
 
 #[derive(Parser)]
 #[command(name = "mol", version, about = "Mol CLI")]
-pub struct Cli {
+struct Cli {
     #[command(subcommand)]
     pub(crate) command: Commands,
 }
 
 #[derive(Subcommand)]
-pub enum Commands {
+enum Commands {
     Import {
         file: PathBuf,
     },
@@ -34,17 +34,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     match cli.command {
         Commands::Import { file } => {
-            let _ = commands::import::execute(file, &client).await;
+            commands::import::execute(file, &client).await
         }
 
         Commands::Products { names } => {
-            let _ = commands::products::execute(names, &client).await;
+            commands::products::execute(names, &client).await
         }
 
         Commands::Reagents { name } => {
-            let _ = commands::reagents::execute(name, &client).await;
+            commands::reagents::execute(name, &client).await
         }
     }
-
-    Ok(())
 }
