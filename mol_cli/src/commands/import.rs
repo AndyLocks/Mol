@@ -1,10 +1,11 @@
 use std::error::Error;
+use std::ops::Deref;
 use std::path::PathBuf;
 use reqwest::{multipart, Client};
-use crate::constants::BASE_URL;
+use crate::config::CONFIG;
 
 pub async fn execute(file: PathBuf, client: &Client) -> Result<(), Box<dyn Error>> {
-    let url = format!("{}/import", BASE_URL);
+    let url = format!("{}/import", CONFIG.deref().url.clone());
 
     let file_name = file
         .file_name()

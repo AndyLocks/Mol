@@ -1,5 +1,5 @@
-mod constants;
 mod commands;
+mod config;
 
 use std::path::PathBuf;
 use clap::{Parser, Subcommand};
