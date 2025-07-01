@@ -1,19 +1,22 @@
-use reqwest::{Client};
+use reqwest::blocking::Client;
 use std::error::Error;
 use std::ops::Deref;
 use crate::config::CONFIG;
 
-pub async fn execute(names: Vec<String>, client: &Client) -> Result<(), Box<dyn Error>> {
-    let url = format!("{}/products?asText=true", CONFIG.deref().url.clone());
+pub fn execute(names: Vec<String>, json: bool, client: &Client) -> Result<(), Box<dyn Error>> {
+    let mut url = format!("{}/products", CONFIG.deref().url.clone());
+
+    if !json {
+        url.push_str("?asText=true")
+    }
 
     let response = client
         .get(url)
         .header("Content-Type", "application/json")
         .body(serde_json::to_string(&names)?)
-        .send()
-        .await?;
+        .send()?;
 
-    println!("{}", response.text().await?);
+    println!("{}", response.text()?);
 
     Ok(())
 }

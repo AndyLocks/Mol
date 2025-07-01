@@ -1,14 +1,18 @@
-use reqwest::Client;
+use reqwest::blocking::Client;
 use std::error::Error;
 use std::ops::Deref;
 use crate::config::CONFIG;
 
-pub async fn execute(name: String, client: &Client) -> Result<(), Box<dyn Error>> {
-    let url = format!("{}/reagents?asText=true", CONFIG.deref().url.clone());
+pub fn execute(name: String, json: bool, client: &Client) -> Result<(), Box<dyn Error>> {
+    let mut url = format!("{}/reagents", CONFIG.deref().url.clone());
 
-    let response = client.get(url).body(name).send().await?;
+    if !json {
+        url.push_str("?asText=true");
+    }
 
-    println!("{}", response.text().await?);
+    let response = client.get(url).body(name).send()?;
+
+    println!("{}", response.text()?);
 
     Ok(())
 }
