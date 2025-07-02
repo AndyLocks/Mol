@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use once_cell::sync::Lazy;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Config {
@@ -14,6 +14,5 @@ impl Default for Config {
     }
 }
 
-pub static CONFIG: Lazy<Config> = Lazy::new(|| {
-    confy::load("mol", "mol").expect("Cannot load config")
-});
+pub static CONFIG: Lazy<Config> =
+    Lazy::new(|| confy::load("mol", "mol").expect("Cannot load config"));

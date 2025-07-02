@@ -1,5 +1,5 @@
 use crate::cli_commands::Commands;
-use clap::{Parser};
+use clap::Parser;
 
 #[derive(Parser)]
 #[command(
