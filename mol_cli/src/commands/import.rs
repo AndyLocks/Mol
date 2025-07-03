@@ -9,8 +9,8 @@ use std::path::PathBuf;
 pub fn execute(
     file: Option<PathBuf>,
     script: Option<String>,
-    client: &Client,
 ) -> Result<(), Box<dyn Error>> {
+    let client = Client::new();
     let url = format!("{}/import", CONFIG.deref().url.clone());
 
     if file.is_some() {
