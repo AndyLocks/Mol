@@ -1,4 +1,5 @@
 use clap::Subcommand;
+use clap_complete::Shell;
 use std::path::PathBuf;
 
 #[derive(Subcommand)]
@@ -46,5 +47,11 @@ pub enum Commands {
 
         #[arg(short, long, help = "Display url")]
         output: bool,
+    },
+
+    #[command(about = "Generate auto completion", help_expected = true)]
+    Completions {
+        #[arg(help = "Your shell name (zsh, bash, fish, elvish, powershell)")]
+        shell: Shell,
     },
 }

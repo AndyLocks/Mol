@@ -13,6 +13,7 @@ impl Executable for Commands {
             Commands::Products { names, json } => commands::products::execute(names, json),
             Commands::Reagents { name, json } => commands::reagents::execute(name, json),
             Commands::Url { url, output } => commands::url::execute(url, output),
+            Commands::Completions {shell} => commands::completions::execute(shell)
         }
     }
 }
