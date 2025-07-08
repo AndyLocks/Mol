@@ -175,10 +175,10 @@
 <p>Команда <code>completions</code> нужна для генерации авто-заполнений в терминале. По факту это означает, что при нажатии кнопки автокомплита вашего терминала (обычно это Tab) после ввода команды <code>mol</code> вы получите подсказки.</p>
 <p>Авто-заполнения нужно добавлять отдельно для вашей оболочки:</p>
 <pre><code class="language-bash"># bash
-mol completions bash &gt; ~/.local/share/bash-completion/completions/mdbook
+mol completions bash &gt; ~/.local/share/bash-completion/completions/mol
 
 # oh-my-zsh
-mol completions zsh &gt; ~/.oh-my-zsh/completions/_mdbook
+mol completions zsh &gt; ~/.oh-my-zsh/completions/_mol
 
 autoload -U compinit &amp;&amp; compinit
 </code></pre>
