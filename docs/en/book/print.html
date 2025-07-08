@@ -1,0 +1,1035 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Mol</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Mol</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/AndyLocks/Mol" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="abstract"><a class="header" href="#abstract">Abstract</a></h1>
+<p><a href="https://spring.io/"><img src="https://img.shields.io/badge/Spring-a6e3a1?style=for-the-badge&amp;logo=spring&amp;labelColor=1e1e2e&amp;logoColor=a6e3a1" alt="Spring" /></a>
+<a href="https://neo4j.com/"><img src="https://img.shields.io/badge/neo4j-89b4fa?style=for-the-badge&amp;logo=neo4j&amp;logoColor=cdd6f4&amp;labelColor=1e1e2e" alt="neo4j" /></a></p>
+<hr />
+<p>This is an experimental project that connects chemistry with abstract mathematics through category theory. At its core lies an original model in which molecules and chemical reactions are represented as objects and morphisms in a multicategory.</p>
+<p>The project offers:</p>
+<ul>
+<li>A formal description of chemical reactions as compositional transformations;</li>
+<li>A custom syntax for describing molecules, reactions, and reaction chains;</li>
+<li>A server-side API for analyzing, storing, and searching reaction pathways;</li>
+<li>A possible foundation for synthesis simulation, automatic product derivation, and reaction network visualization.</li>
+</ul>
+<p>Why might this be interesting?</p>
+<ul>
+<li>For mathematicians: a living example of applying categorical thinking to natural science.</li>
+<li>For chemists: a tool for analyzing and formalizing reactions without losing chemical meaning.</li>
+<li>For programmers: a clean, extensible project at the intersection of language, graphs, and algebra.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="description"><a class="header" href="#description">Description</a></h1>
+<p>This part is still a work in progress, so the description is not complete. The original work also describes graphs, petri nets, and functors between all these categories.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="category-of-molecular-reactions"><a class="header" href="#category-of-molecular-reactions">Category of Molecular Reactions</a></h1>
+<p>This is a <strong>multicategory</strong> \(\mathbf{Mol}\), in which all <strong>objects</strong> are molecules. These molecules have no names or identifiers within this category — they are abstract molecules. However, for convenience, we will refer to them using familiar names such as \(\mathsf{H_2O}\). Later, when discussing functors, we will treat the names of molecules as a separate structure. So for now, we can say something like:</p>
+<p>$$
+\mathrm{Ob}(\mathbf{Mol}) = \{ \mathsf{H_2O}, \mathsf{O_2}, \mathsf{NaOH}, \dots \}
+$$</p>
+<p>But you are free to name the molecules however you want — with letters, shapes, or remain purely abstract. For convenience, though, we’ll use familiar chemical names.</p>
+<h2 id="morphisms"><a class="header" href="#morphisms">Morphisms</a></h2>
+<p>Morphisms in this category represent generalized reactions. We are not concerned with the number of molecules involved or the specific type of reaction (e.g., combustion, substitution, oxidation). We focus solely on which molecules can produce which others — the <em>possibility</em> of transformation, not the mechanism. Even if we haven’t discovered a certain reaction yet, we can still operate <em>as if</em> such a transformation exists (via future discoveries or compositions of existing reactions). Just like in \(\mathbf{Set}\), where a transition between sets can be realized through infinitely many possible functions.</p>
+<p>Behind these morphisms lies standard chemistry: ordinary reaction equations with the same meaning as functions in \(\mathbf{Set}\).</p>
+<p>Let’s look at a few examples.</p>
+<hr />
+<h3 id="1-combustion-of-methane-an-organic-oxidation-reaction"><a class="header" href="#1-combustion-of-methane-an-organic-oxidation-reaction">1. Combustion of Methane (an organic oxidation reaction):</a></h3>
+<p><strong>Chemical Equation:</strong></p>
+<p>$$
+\mathsf{CH_3(g) + 2O_2(g) \rightarrow CO_2(g) + 2H_2O(g)}
+$$</p>
+<p><strong>Morphisms:</strong></p>
+<p>$$
+f_1 : (\mathsf{CH_3}, \mathsf{O_2}) \to  \mathsf{CO_2}
+$$</p>
+<p>$$
+f_2 : (\mathsf{CH_3}, \mathsf{O_2}) \to  \mathsf{H_2O}
+$$</p>
+<p><strong>Reaction Type:</strong> Oxidation (combustion), exothermic.</p>
+<p><strong>Explanation:</strong>
+This reaction has two morphisms because it has two products. For compositional clarity, it's better to define two morphisms instead of one with multiple outputs. Also, note that we <strong>ignore molecule counts</strong> (e.g., we use \(\mathsf{H_2O}\) instead of \(2\mathsf{H_2O}\)). At this level of abstraction, we care only about the presence of transformations.</p>
+<hr />
+<h3 id="2-neutralization-sodium-hydroxide--hydrochloric-acid"><a class="header" href="#2-neutralization-sodium-hydroxide--hydrochloric-acid">2. Neutralization: Sodium hydroxide + Hydrochloric acid</a></h3>
+<p><strong>Chemical Equation:</strong></p>
+<p>$$
+\mathsf{NaOH(aq) + HCl(aq) \rightarrow NaCl(aq) + H_2O(l)}
+$$</p>
+<p><strong>Morphisms:</strong></p>
+<p>$$
+f_1 : (\mathsf{NaOH}, \mathsf{HCl}) \to  \mathsf{NaCl}
+$$</p>
+<p>$$
+f_2 : (\mathsf{NaOH}, \mathsf{HCl}) \to  \mathsf{H_2O}
+$$</p>
+<p><strong>Reaction Type:</strong> Double replacement, neutralization, exothermic.</p>
+<hr />
+<h3 id="3-decomposition-of-hydrogen-peroxide"><a class="header" href="#3-decomposition-of-hydrogen-peroxide">3. Decomposition of Hydrogen Peroxide</a></h3>
+<p><strong>Chemical Equation:</strong></p>
+<p>$$
+\mathsf{2H_2O_2(aq) \rightarrow 2H_2O(l) + O_2(g)}
+$$</p>
+<p><strong>Morphisms:</strong></p>
+<p>$$
+f_1 : \mathsf{H_2O_2} \to  \mathsf{H_2O}
+$$</p>
+<p>$$
+f_2 : \mathsf{H_2O_2} \to  \mathsf{O_2}
+$$</p>
+<p><strong>Reaction Type:</strong> Decomposition, redox.</p>
+<hr />
+<h3 id="4-single-replacement-zinc--hydrochloric-acid"><a class="header" href="#4-single-replacement-zinc--hydrochloric-acid">4. Single Replacement: Zinc + Hydrochloric Acid</a></h3>
+<p><strong>Chemical Equation:</strong></p>
+<p>$$
+\mathsf{Zn(s) + 2HCl(aq) \rightarrow ZnCl_2(aq) + H_2(g)}
+$$</p>
+<p><strong>Morphisms:</strong></p>
+<p>$$
+f_1 : (\mathsf{Zn}, \mathsf{HCl}) \to  \mathsf{ZnCl_2}
+$$</p>
+<p>$$
+f_2 : (\mathsf{Zn}, \mathsf{HCl}) \to  \mathsf{H_2}
+$$</p>
+<p><strong>Reaction Type:</strong> Substitution, redox.</p>
+<hr />
+<h3 id="5-thermal-decomposition-of-calcium-carbonate"><a class="header" href="#5-thermal-decomposition-of-calcium-carbonate">5. Thermal Decomposition of Calcium Carbonate</a></h3>
+<p><strong>Chemical Equation:</strong></p>
+<p>$$
+\mathsf{CaCO_3(s) \xrightarrow{Δ} CaO(s) + CO_2(g)}
+$$</p>
+<p><strong>Morphisms:</strong></p>
+<p>$$
+f_1 : \mathsf{CaCO_3} \to \mathsf{CaO}
+$$</p>
+<p>$$
+f_2 : \mathsf{CaCO_3} \to \mathsf{CO_2}
+$$</p>
+<p><strong>Reaction Type:</strong> Decomposition.</p>
+<h2 id="identity-morphisms"><a class="header" href="#identity-morphisms">Identity Morphisms</a></h2>
+<p>Every object has an identity morphism:</p>
+<p>$$
+\forall o \in \mathrm{Ob}(\mathbf{Mol}) : \mathrm{id}_o \in \mathrm{Hom}_{\mathbf{Mol}}(o, o)
+$$</p>
+<p>For example:</p>
+<p>$$
+id_{H_2O} : H_2O \to H_2O
+$$</p>
+<p>$$
+id_{O_2} : O_2 \to O_2
+$$</p>
+<p>Usually, this means the molecule is simply at rest, and no reaction occurs. But sometimes it could represent a change in physical state:</p>
+<p>$$
+\mathsf{Br_{2(g)}} \to \mathsf{Br_{2(l)}} \to \mathsf{Br_{2(s)}}
+$$</p>
+<p>However, since we abstract away from quantities and reaction pathways, and focus only on participants and reaction possibility, we treat it as:</p>
+<p>$$
+id_{Br_2} : Br_2 \to Br_2
+$$</p>
+<h2 id="composition"><a class="header" href="#composition">Composition</a></h2>
+<p>Let’s say we have a morphism:</p>
+<p>$$
+f : (A_1, A_2, ..., A_n) \to B
+$$</p>
+<p>And for each \(A_i\), we have a morphism:</p>
+<p>$$
+g_i : (B_{i1}, ..., B_{im_i}) \to A_i
+$$</p>
+<p>Then we can compose them into:</p>
+<p>$$
+f \circ (g_1, ..., g_n) : (B_{11}, ..., B_{1m_1}, ..., B_{n1}, ..., B_{nm_n}) \to B
+$$</p>
+<p>Example:</p>
+<p>If</p>
+<p>\(f: (A, B) \to C\)<br />
+\(g: (D, E) \to A\)</p>
+<p>Then:</p>
+<p>$$
+f \circ (g, id_B) : (D, E) \to C
+$$</p>
+<p>Let’s now derive this reaction:</p>
+<p>$$
+(\mathsf{CH_3}, \mathsf{O_2}) \to \mathsf{NaOH}
+$$</p>
+<p>Let’s imagine we don't yet know if this is possible, and try to <strong>construct it</strong> using known reactions.</p>
+<p>We start with a known reaction:</p>
+<p>$$
+\mathsf{Na_2O} + \mathsf{H_2O} \rightarrow \mathsf{2NaOH}
+$$</p>
+<p>This gives us a morphism:</p>
+<p>$$
+f : (\mathsf{Na_2O}, \mathsf{H_2O}) \to \mathsf{NaOH}
+$$</p>
+<p>Now, we need a way to get \(\mathsf{H_2O}\). One known reaction is:</p>
+<p>$$
+\mathsf{CH_3(g) + 2O_2(g) \rightarrow CO_2(g) + 2H_2O(g)}
+$$</p>
+<p>Which gives us:</p>
+<p>$$
+g : (\mathsf{CH_3}, \mathsf{O_2}) \to \mathsf{H_2O}
+$$</p>
+<p>So we can form the composition:</p>
+<p>$$
+f \circ (id_{\mathsf{Na_2O}}, g) : (\mathsf{CH_3}, \mathsf{O_2}) \to \mathsf{NaOH}
+$$</p>
+<p>Let’s again take the morphism \(f\):</p>
+<p>$$
+f : (\mathsf{Na_2O}, \ \mathsf{H_2O}) \to  \mathsf{NaOH}
+$$</p>
+<p>And think: what other compositions can be constructed?
+Essentially, the number of such compositions equals the number of ways to obtain \(\mathsf{H_2O}\) \(\times\) the number of ways to obtain \(\mathsf{Na_2O}\).
+We already know a few ways to derive \(\mathsf{H_2O}\) from the reactions mentioned above:</p>
+<p>$$
+g_1 : \mathsf{H_2O_2} \to \mathsf{H_2O}
+$$</p>
+<p>$$
+g_2 : (\mathsf{NaOH}, \mathsf{HCl}) \to \mathsf{H_2O}
+$$</p>
+<p>$$
+g_3 : (\mathsf{CH_3}, \mathsf{O_2}) \to \mathsf{H_2O}
+$$</p>
+<p>Then:</p>
+<p>$$
+f \circ (id_{\mathsf{Na_2O}}, g_1) : \mathsf{H_2O_2} \to \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (id_{\mathsf{Na_2O}}, g_2) : (\mathsf{NaOH}, \mathsf{HCl}) \to \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (id_{\mathsf{Na_2O}}, g_3) : (\mathsf{CH_3}, \mathsf{O_2}) \to \mathsf{NaOH}
+$$</p>
+<p>Now let’s find ways to produce \(\mathsf{Na_2O}\):</p>
+<p>$$
+4\mathsf{Na} + \mathsf{O_2} \rightarrow 2\mathsf{Na_2O}
+$$</p>
+<p>$$
+2\mathsf{Na_2O_2} \xrightarrow{t} 2\mathsf{Na_2O} + \mathsf{O_2}
+$$</p>
+<p>Which give:</p>
+<p>$$
+h_1 : (\mathsf{Na}, \mathsf{O_2}) \to \mathsf{Na_2O}
+$$</p>
+<p>$$
+h_2 : \mathsf{Na_2O_2} \to \mathsf{Na_2O}
+$$</p>
+<p>Now we can compose:</p>
+<p>$$
+f \circ (h_1, g_1) : (\mathsf{Na}, \mathsf{O_2}, \mathsf{H_2O_2}) \to \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (h_1, g_2) : (\mathsf{Na}, \mathsf{O_2}, \mathsf{NaOH}, \mathsf{HCl}) \to \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (h_1, g_3) : (\mathsf{Na}, \mathsf{CH_3}, \mathsf{O_2}) \to \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (h_2, g_1) : (\mathsf{Na_2O_2}, \mathsf{H_2O_2}) \to \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (h_2, g_2) : (\mathsf{Na_2O_2}, \mathsf{NaOH}, \mathsf{HCl}) \to \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (h_2, g_3) : (\mathsf{Na_2O_2}, \mathsf{CH_3}, \mathsf{O_2}) \to \mathsf{NaOH}
+$$</p>
+<hr />
+<p>Let’s now take another look at the morphisms \(h_1\) and \(h_2\):</p>
+<p>$$
+h_1 : (\mathsf{Na}, \ \mathsf{O_2}) \to \mathsf{Na_2O}
+$$</p>
+<p>$$
+h_2 : \mathsf{Na_2O_2} \to \mathsf{Na_2O}
+$$</p>
+<p>Notably, we can produce \(\mathsf{Na_2O_2}\) from \(\mathsf{Na}\) and \(\mathsf{O_2}\) via the following reaction:</p>
+<p>$$
+\mathsf{2Na + O_2} \to \mathsf{Na_2O_2}
+$$</p>
+<p>This means there exists a morphism:</p>
+<p>$$
+k: (\mathsf{Na}, \ \mathsf{O_2}) \to \mathsf{Na_2O_2}
+$$</p>
+<p>Which implies that the morphism \(h_1\) can be expressed as the composition:</p>
+<p>$$
+h_2 \circ k : (\mathsf{Na}, \ \mathsf{O_2}) \to \mathsf{Na_2O}
+$$</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="multifunction-to-the-category-of-sets-mathbfmol-to-mathbfset"><a class="header" href="#multifunction-to-the-category-of-sets-mathbfmol-to-mathbfset">Multifunction to the Category of Sets (\(\mathbf{Mol} \to \mathbf{Set}\))</a></h1>
+<p>We define a <strong>multifunctor</strong></p>
+<p>$$
+F : \mathbf{Mol} \to \mathbf{Set}
+$$</p>
+<p>All objects from \(\mathbf{Mol}\) are mapped to singleton sets:</p>
+<p>$$
+F(\mathsf{H_2O}) = \{ \mathsf{H_2O} \}
+$$</p>
+<p>$$
+F(\mathsf{CO_2}) = \{ \mathsf{CO_2} \}
+$$</p>
+<p>$$
+\cdots
+$$</p>
+<p>In the category \(\mathbf{Set}\), there always exists a set of all molecules:</p>
+<p>$$
+K = \bigcup_{m \in \mathrm{Ob}(\mathbf{Mol})} F(m), \quad K \in \mathbf{Set}
+$$</p>
+<p>Each morphism</p>
+<p>\(f: (X_1, \dots, X_n) \to Y\) in \(\mathbf{Mol}\) is mapped to a function:</p>
+<p>$$
+F(f): F(X_1) \times \dots \times F(X_n) \to F(Y)
+$$</p>
+<p>These functions don't contain interesting dynamics, but the functor \(F\) itself allows us to define the <strong>set of all molecules</strong> \(K\), which can then be used as a basis for further mappings.</p>
+<p>$$
+\mathsf{H_2O} \in K
+$$</p>
+<p>Note that molecules like \(2H_2O\) do <strong>not</strong> exist in this set:</p>
+<p>$$
+\mathsf{2H_2O} \notin K
+$$</p>
+<p>Let’s define the <strong>set of all chemical elements</strong> \(E\):</p>
+<p>$$
+E \subset K
+$$</p>
+<p>$$
+\mathsf{H} \in E
+$$</p>
+<p>$$
+\mathsf{H_2O} \notin E
+$$</p>
+<p>Now we introduce subsets for different categories of elements, such as metals and nonmetals:</p>
+<ul>
+<li>\(NM\): set of nonmetals</li>
+</ul>
+<p>$$
+NM \subset E
+$$</p>
+<p>$$
+\{ \mathsf{H}, \mathsf{C}, \mathsf{N}, \mathsf{O} \} \subset NM
+$$</p>
+<ul>
+<li>\(HM\): set of metalloids (semi-metals)</li>
+</ul>
+<p>$$
+HM \subset E
+$$</p>
+<ul>
+<li>\(M\): set of metals</li>
+</ul>
+<p>$$
+M \subset E
+$$</p>
+<p>$$
+\mathsf{Ti} \in M
+$$</p>
+<p>We assume:</p>
+<p>$$
+NM \cap M = \emptyset
+$$</p>
+<p>$$
+HM \cap M = \emptyset
+$$</p>
+<p>$$
+HM \cap NM = \emptyset
+$$</p>
+<p>Metals can also be divided into more specific categories:</p>
+<ul>
+<li>\(M_A\): alkali metals</li>
+</ul>
+<p>$$
+M_A \subset M
+$$</p>
+<p>$$
+\mathsf{Na} \in M_A
+$$</p>
+<p>Alternatively defined as (first group elements excluding hydrogen):</p>
+<p>$$
+M_A = \{e \in E \mid G(e) = 1\} \setminus \{\mathsf{H}\} = \{ \mathsf{Li}, \mathsf{Na}, \mathsf{K}, \mathsf{Rb}, \mathsf{Cs}, \mathsf{Fr} \}
+$$</p>
+<p>Here, the function \(G\) (described below) maps each element to its group in the periodic table.</p>
+<ul>
+<li>\(M_{AE}\): alkaline earth metals</li>
+</ul>
+<p>$$
+M_{AE} \subset M
+$$</p>
+<p>$$
+M_{AE} = \{ e \in E \mid G(e) = 2 \} = \{ \mathsf{Be}, \mathsf{Mg}, \mathsf{Ca}, \mathsf{Sr}, \mathsf{Ba}, \mathsf{Ra} \}
+$$</p>
+<p>Other metal categories:</p>
+<ul>
+<li>Transition metals: \(M_T \subset M\)</li>
+<li>Lanthanides: \(M_L \subset M\)</li>
+<li>Actinides: \(M_{AC} \subset M\)</li>
+<li>Post-transition metals: \(M_{PT} \subset M\)</li>
+</ul>
+<div align="center">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="340.954pt" height="340.954pt" viewBox="0 0 340.954 340.954">
+<defs>
+<g>
+<g id="glyph-0-0">
+<path d="M 5.078125 -4.03125 C 5.0625 -4.0625 5.03125 -4.140625 5.03125 -4.171875 C 5.03125 -4.171875 5.203125 -4.3125 5.3125 -4.390625 L 7.0625 -5.734375 C 8 -6.4375 8.390625 -6.46875 8.6875 -6.5 C 8.765625 -6.515625 8.859375 -6.515625 8.859375 -6.703125 C 8.859375 -6.734375 8.828125 -6.8125 8.75 -6.8125 C 8.53125 -6.8125 8.28125 -6.78125 8.046875 -6.78125 C 7.6875 -6.78125 7.296875 -6.8125 6.9375 -6.8125 C 6.875 -6.8125 6.75 -6.8125 6.75 -6.609375 C 6.75 -6.546875 6.796875 -6.515625 6.875 -6.5 C 7.09375 -6.484375 7.171875 -6.4375 7.171875 -6.296875 C 7.171875 -6.109375 6.875 -5.875 6.8125 -5.828125 L 2.9375 -2.84375 L 3.734375 -6.046875 C 3.8125 -6.40625 3.84375 -6.5 4.5625 -6.5 C 4.8125 -6.5 4.90625 -6.5 4.90625 -6.703125 C 4.90625 -6.78125 4.828125 -6.8125 4.765625 -6.8125 C 4.484375 -6.8125 3.765625 -6.78125 3.484375 -6.78125 C 3.203125 -6.78125 2.5 -6.8125 2.203125 -6.8125 C 2.140625 -6.8125 2 -6.8125 2 -6.625 C 2 -6.5 2.09375 -6.5 2.296875 -6.5 C 2.421875 -6.5 2.609375 -6.484375 2.71875 -6.484375 C 2.875 -6.453125 2.9375 -6.4375 2.9375 -6.3125 C 2.9375 -6.28125 2.9375 -6.25 2.90625 -6.125 L 1.5625 -0.78125 C 1.46875 -0.390625 1.453125 -0.3125 0.65625 -0.3125 C 0.484375 -0.3125 0.375 -0.3125 0.375 -0.125 C 0.375 0 0.5 0 0.53125 0 C 0.8125 0 1.515625 -0.03125 1.796875 -0.03125 C 2 -0.03125 2.21875 -0.015625 2.4375 -0.015625 C 2.65625 -0.015625 2.875 0 3.078125 0 C 3.15625 0 3.28125 0 3.28125 -0.203125 C 3.28125 -0.3125 3.1875 -0.3125 3 -0.3125 C 2.625 -0.3125 2.359375 -0.3125 2.359375 -0.484375 C 2.359375 -0.5625 2.40625 -0.78125 2.4375 -0.921875 C 2.578125 -1.453125 2.71875 -1.96875 2.84375 -2.5 L 4.328125 -3.65625 L 5.484375 -0.96875 C 5.609375 -0.703125 5.609375 -0.671875 5.609375 -0.625 C 5.609375 -0.3125 5.171875 -0.3125 5.078125 -0.3125 C 4.96875 -0.3125 4.859375 -0.3125 4.859375 -0.109375 C 4.859375 0 4.984375 0 5 0 C 5.40625 0 5.828125 -0.03125 6.21875 -0.03125 C 6.4375 -0.03125 6.984375 0 7.203125 0 C 7.25 0 7.375 0 7.375 -0.203125 C 7.375 -0.3125 7.265625 -0.3125 7.171875 -0.3125 C 6.765625 -0.3125 6.640625 -0.40625 6.484375 -0.75 Z M 5.078125 -4.03125 "/>
+</g>
+<g id="glyph-0-1">
+<path d="M 7.0625 -2.328125 C 7.078125 -2.375 7.109375 -2.4375 7.109375 -2.46875 C 7.109375 -2.46875 7.109375 -2.578125 6.984375 -2.578125 C 6.890625 -2.578125 6.875 -2.515625 6.859375 -2.453125 C 6.203125 -0.984375 5.84375 -0.3125 4.140625 -0.3125 L 2.6875 -0.3125 C 2.546875 -0.3125 2.515625 -0.3125 2.46875 -0.3125 C 2.359375 -0.328125 2.328125 -0.34375 2.328125 -0.421875 C 2.328125 -0.453125 2.328125 -0.46875 2.375 -0.640625 L 3.0625 -3.375 L 4.046875 -3.375 C 4.890625 -3.375 4.890625 -3.15625 4.890625 -2.90625 C 4.890625 -2.84375 4.890625 -2.71875 4.828125 -2.421875 C 4.8125 -2.375 4.796875 -2.34375 4.796875 -2.3125 C 4.796875 -2.265625 4.828125 -2.203125 4.921875 -2.203125 C 5 -2.203125 5.03125 -2.25 5.078125 -2.40625 L 5.640625 -4.734375 C 5.640625 -4.796875 5.59375 -4.84375 5.515625 -4.84375 C 5.4375 -4.84375 5.40625 -4.78125 5.390625 -4.671875 C 5.171875 -3.90625 5 -3.671875 4.078125 -3.671875 L 3.140625 -3.671875 L 3.734375 -6.078125 C 3.828125 -6.4375 3.84375 -6.46875 4.28125 -6.46875 L 5.6875 -6.46875 C 6.890625 -6.46875 7.203125 -6.1875 7.203125 -5.359375 C 7.203125 -5.125 7.203125 -5.109375 7.15625 -4.828125 C 7.15625 -4.78125 7.140625 -4.703125 7.140625 -4.65625 C 7.140625 -4.609375 7.171875 -4.53125 7.265625 -4.53125 C 7.375 -4.53125 7.390625 -4.59375 7.40625 -4.78125 L 7.609375 -6.515625 C 7.640625 -6.78125 7.59375 -6.78125 7.34375 -6.78125 L 2.296875 -6.78125 C 2.109375 -6.78125 2 -6.78125 2 -6.578125 C 2 -6.46875 2.09375 -6.46875 2.28125 -6.46875 C 2.65625 -6.46875 2.9375 -6.46875 2.9375 -6.296875 C 2.9375 -6.25 2.9375 -6.234375 2.875 -6.046875 L 1.5625 -0.78125 C 1.46875 -0.390625 1.453125 -0.3125 0.65625 -0.3125 C 0.484375 -0.3125 0.375 -0.3125 0.375 -0.125 C 0.375 0 0.46875 0 0.65625 0 L 5.828125 0 C 6.0625 0 6.078125 -0.015625 6.140625 -0.171875 Z M 7.0625 -2.328125 "/>
+</g>
+<g id="glyph-0-2">
+<path d="M 7.53125 -5.765625 C 7.640625 -6.15625 7.8125 -6.46875 8.609375 -6.5 C 8.65625 -6.5 8.78125 -6.515625 8.78125 -6.703125 C 8.78125 -6.703125 8.78125 -6.8125 8.65625 -6.8125 C 8.328125 -6.8125 7.96875 -6.78125 7.640625 -6.78125 C 7.3125 -6.78125 6.953125 -6.8125 6.625 -6.8125 C 6.5625 -6.8125 6.453125 -6.8125 6.453125 -6.609375 C 6.453125 -6.5 6.546875 -6.5 6.625 -6.5 C 7.203125 -6.484375 7.3125 -6.28125 7.3125 -6.0625 C 7.3125 -6.03125 7.28125 -5.875 7.28125 -5.859375 L 6.15625 -1.421875 L 3.953125 -6.625 C 3.875 -6.796875 3.875 -6.8125 3.640625 -6.8125 L 2.296875 -6.8125 C 2.109375 -6.8125 2.015625 -6.8125 2.015625 -6.609375 C 2.015625 -6.5 2.109375 -6.5 2.296875 -6.5 C 2.34375 -6.5 2.96875 -6.5 2.96875 -6.40625 L 1.640625 -1.0625 C 1.53125 -0.65625 1.359375 -0.34375 0.5625 -0.3125 C 0.5 -0.3125 0.390625 -0.296875 0.390625 -0.109375 C 0.390625 -0.046875 0.4375 0 0.515625 0 C 0.84375 0 1.1875 -0.03125 1.515625 -0.03125 C 1.859375 -0.03125 2.21875 0 2.546875 0 C 2.59375 0 2.71875 0 2.71875 -0.203125 C 2.71875 -0.296875 2.625 -0.3125 2.515625 -0.3125 C 1.9375 -0.328125 1.859375 -0.546875 1.859375 -0.75 C 1.859375 -0.8125 1.875 -0.875 1.90625 -0.984375 L 3.21875 -6.234375 C 3.265625 -6.1875 3.265625 -6.15625 3.3125 -6.0625 L 5.796875 -0.1875 C 5.859375 -0.015625 5.890625 0 5.984375 0 C 6.09375 0 6.09375 -0.03125 6.140625 -0.203125 Z M 7.53125 -5.765625 "/>
+</g>
+<g id="glyph-0-3">
+<path d="M 9.234375 -6.046875 C 9.328125 -6.40625 9.34375 -6.5 10.09375 -6.5 C 10.3125 -6.5 10.40625 -6.5 10.40625 -6.703125 C 10.40625 -6.8125 10.3125 -6.8125 10.140625 -6.8125 L 8.828125 -6.8125 C 8.5625 -6.8125 8.546875 -6.8125 8.4375 -6.625 L 4.796875 -0.9375 L 4.015625 -6.578125 C 3.984375 -6.8125 3.96875 -6.8125 3.703125 -6.8125 L 2.34375 -6.8125 C 2.15625 -6.8125 2.046875 -6.8125 2.046875 -6.625 C 2.046875 -6.5 2.140625 -6.5 2.328125 -6.5 C 2.46875 -6.5 2.640625 -6.484375 2.765625 -6.484375 C 2.921875 -6.453125 2.984375 -6.4375 2.984375 -6.3125 C 2.984375 -6.28125 2.96875 -6.25 2.9375 -6.125 L 1.671875 -1.0625 C 1.578125 -0.65625 1.40625 -0.34375 0.59375 -0.3125 C 0.546875 -0.3125 0.421875 -0.296875 0.421875 -0.125 C 0.421875 -0.03125 0.484375 0 0.5625 0 C 0.875 0 1.21875 -0.03125 1.5625 -0.03125 C 1.890625 -0.03125 2.25 0 2.578125 0 C 2.625 0 2.765625 0 2.765625 -0.203125 C 2.765625 -0.3125 2.65625 -0.3125 2.578125 -0.3125 C 2.015625 -0.3125 1.90625 -0.515625 1.90625 -0.75 C 1.90625 -0.8125 1.90625 -0.875 1.9375 -0.984375 L 3.296875 -6.40625 L 3.3125 -6.40625 L 4.171875 -0.234375 C 4.1875 -0.109375 4.203125 0 4.3125 0 C 4.421875 0 4.484375 -0.109375 4.53125 -0.171875 L 8.5625 -6.484375 L 8.578125 -6.484375 L 7.140625 -0.78125 C 7.046875 -0.390625 7.03125 -0.3125 6.234375 -0.3125 C 6.078125 -0.3125 5.96875 -0.3125 5.96875 -0.125 C 5.96875 0 6.078125 0 6.109375 0 C 6.390625 0 7.0625 -0.03125 7.34375 -0.03125 C 7.75 -0.03125 8.1875 0 8.59375 0 C 8.65625 0 8.78125 0 8.78125 -0.203125 C 8.78125 -0.3125 8.6875 -0.3125 8.5 -0.3125 C 8.140625 -0.3125 7.859375 -0.3125 7.859375 -0.484375 C 7.859375 -0.53125 7.859375 -0.546875 7.90625 -0.734375 Z M 9.234375 -6.046875 "/>
+</g>
+<g id="glyph-0-4">
+<path d="M 7.609375 -6.046875 C 7.703125 -6.40625 7.71875 -6.5 8.4375 -6.5 C 8.703125 -6.5 8.78125 -6.5 8.78125 -6.703125 C 8.78125 -6.8125 8.671875 -6.8125 8.640625 -6.8125 C 8.359375 -6.8125 7.640625 -6.78125 7.359375 -6.78125 C 7.078125 -6.78125 6.375 -6.8125 6.078125 -6.8125 C 6 -6.8125 5.890625 -6.8125 5.890625 -6.609375 C 5.890625 -6.5 5.984375 -6.5 6.171875 -6.5 C 6.1875 -6.5 6.375 -6.5 6.546875 -6.484375 C 6.734375 -6.453125 6.8125 -6.453125 6.8125 -6.3125 C 6.8125 -6.28125 6.8125 -6.265625 6.78125 -6.125 L 6.1875 -3.703125 L 3.140625 -3.703125 L 3.734375 -6.046875 C 3.8125 -6.40625 3.84375 -6.5 4.5625 -6.5 C 4.828125 -6.5 4.90625 -6.5 4.90625 -6.703125 C 4.90625 -6.8125 4.796875 -6.8125 4.765625 -6.8125 C 4.484375 -6.8125 3.765625 -6.78125 3.484375 -6.78125 C 3.203125 -6.78125 2.5 -6.8125 2.203125 -6.8125 C 2.125 -6.8125 2.015625 -6.8125 2.015625 -6.609375 C 2.015625 -6.5 2.109375 -6.5 2.296875 -6.5 C 2.3125 -6.5 2.5 -6.5 2.671875 -6.484375 C 2.84375 -6.453125 2.9375 -6.453125 2.9375 -6.3125 C 2.9375 -6.28125 2.9375 -6.25 2.90625 -6.125 L 1.5625 -0.78125 C 1.46875 -0.390625 1.453125 -0.3125 0.65625 -0.3125 C 0.484375 -0.3125 0.390625 -0.3125 0.390625 -0.109375 C 0.390625 0 0.515625 0 0.53125 0 C 0.8125 0 1.515625 -0.03125 1.796875 -0.03125 C 2 -0.03125 2.21875 -0.015625 2.4375 -0.015625 C 2.65625 -0.015625 2.875 0 3.078125 0 C 3.15625 0 3.28125 0 3.28125 -0.203125 C 3.28125 -0.3125 3.1875 -0.3125 3 -0.3125 C 2.625 -0.3125 2.359375 -0.3125 2.359375 -0.484375 C 2.359375 -0.546875 2.375 -0.59375 2.375 -0.65625 L 3.0625 -3.390625 L 6.09375 -3.390625 C 5.6875 -1.734375 5.453125 -0.78125 5.40625 -0.640625 C 5.3125 -0.3125 5.125 -0.3125 4.5 -0.3125 C 4.359375 -0.3125 4.265625 -0.3125 4.265625 -0.109375 C 4.265625 0 4.390625 0 4.40625 0 C 4.6875 0 5.390625 -0.03125 5.671875 -0.03125 C 5.875 -0.03125 6.09375 -0.015625 6.3125 -0.015625 C 6.53125 -0.015625 6.75 0 6.953125 0 C 7.03125 0 7.15625 0 7.15625 -0.203125 C 7.15625 -0.3125 7.0625 -0.3125 6.875 -0.3125 C 6.515625 -0.3125 6.234375 -0.3125 6.234375 -0.484375 C 6.234375 -0.546875 6.25 -0.59375 6.265625 -0.65625 Z M 7.609375 -6.046875 "/>
+</g>
+<g id="glyph-1-0">
+<path d="M 7.109375 -4.1875 C 7.171875 -4.453125 7.1875 -4.515625 7.703125 -4.515625 C 7.859375 -4.515625 7.9375 -4.515625 7.9375 -4.65625 C 7.9375 -4.765625 7.859375 -4.765625 7.734375 -4.765625 L 6.78125 -4.765625 C 6.578125 -4.765625 6.578125 -4.75 6.484375 -4.625 L 3.796875 -0.640625 L 3.109375 -4.578125 C 3.078125 -4.75 3.078125 -4.765625 2.859375 -4.765625 L 1.875 -4.765625 C 1.734375 -4.765625 1.640625 -4.765625 1.640625 -4.609375 C 1.640625 -4.515625 1.71875 -4.515625 1.875 -4.515625 C 1.984375 -4.515625 2.015625 -4.515625 2.140625 -4.5 C 2.28125 -4.484375 2.296875 -4.46875 2.296875 -4.390625 C 2.296875 -4.390625 2.296875 -4.34375 2.265625 -4.25 L 1.390625 -0.75 C 1.328125 -0.515625 1.21875 -0.265625 0.65625 -0.25 C 0.609375 -0.25 0.515625 -0.25 0.515625 -0.09375 C 0.515625 -0.09375 0.515625 0 0.625 0 C 0.828125 0 1.125 -0.03125 1.34375 -0.03125 C 1.515625 -0.03125 1.921875 0 2.078125 0 C 2.125 0 2.21875 0 2.21875 -0.15625 C 2.21875 -0.25 2.125 -0.25 2.0625 -0.25 C 1.625 -0.265625 1.625 -0.453125 1.625 -0.546875 C 1.625 -0.578125 1.625 -0.609375 1.65625 -0.71875 L 2.578125 -4.421875 L 3.328125 -0.1875 C 3.359375 -0.0625 3.359375 0 3.46875 0 C 3.5625 0 3.625 -0.078125 3.671875 -0.15625 L 6.59375 -4.5 L 6.609375 -4.484375 L 5.625 -0.546875 C 5.5625 -0.3125 5.546875 -0.25 5.015625 -0.25 C 4.890625 -0.25 4.796875 -0.25 4.796875 -0.09375 C 4.796875 -0.09375 4.796875 0 4.90625 0 C 5.046875 0 5.203125 -0.015625 5.34375 -0.015625 C 5.484375 -0.015625 5.640625 -0.03125 5.78125 -0.03125 C 5.984375 -0.03125 6.46875 0 6.671875 0 C 6.703125 0 6.8125 0 6.8125 -0.15625 C 6.8125 -0.25 6.734375 -0.25 6.59375 -0.25 C 6.578125 -0.25 6.453125 -0.25 6.328125 -0.265625 C 6.171875 -0.28125 6.171875 -0.296875 6.171875 -0.375 C 6.171875 -0.40625 6.1875 -0.484375 6.1875 -0.515625 Z M 7.109375 -4.1875 "/>
+</g>
+<g id="glyph-2-0">
+<path d="M 3.625 -3.4375 C 3.609375 -3.53125 3.578125 -3.5625 3.46875 -3.5625 C 3.359375 -3.5625 3.328125 -3.53125 3.28125 -3.453125 L 1.328125 -0.625 C 1.109375 -0.3125 0.9375 -0.234375 0.609375 -0.21875 C 0.515625 -0.21875 0.515625 -0.09375 0.515625 -0.078125 C 0.515625 -0.015625 0.578125 0 0.59375 0 C 0.671875 0 0.75 -0.015625 0.828125 -0.015625 C 0.90625 -0.015625 0.984375 -0.015625 1.078125 -0.015625 C 1.171875 -0.015625 1.265625 -0.015625 1.34375 -0.015625 C 1.4375 -0.015625 1.546875 0 1.640625 0 C 1.671875 0 1.75 0 1.75 -0.140625 C 1.75 -0.21875 1.6875 -0.21875 1.65625 -0.21875 C 1.625 -0.21875 1.421875 -0.234375 1.421875 -0.359375 C 1.421875 -0.40625 1.484375 -0.5 1.515625 -0.546875 L 1.890625 -1.078125 C 1.90625 -1.109375 1.90625 -1.109375 2.015625 -1.109375 L 3.515625 -1.109375 C 3.53125 -1.0625 3.53125 -1.03125 3.546875 -0.96875 C 3.5625 -0.875 3.65625 -0.390625 3.65625 -0.328125 C 3.65625 -0.21875 3.34375 -0.21875 3.328125 -0.21875 C 3.25 -0.21875 3.171875 -0.21875 3.171875 -0.078125 C 3.171875 -0.03125 3.203125 0 3.265625 0 C 3.359375 0 3.484375 -0.015625 3.59375 -0.015625 C 3.71875 -0.015625 3.828125 -0.015625 3.953125 -0.015625 C 4.046875 -0.015625 4.15625 -0.015625 4.265625 -0.015625 C 4.359375 -0.015625 4.484375 0 4.578125 0 C 4.671875 0 4.703125 -0.0625 4.703125 -0.140625 C 4.703125 -0.21875 4.625 -0.21875 4.546875 -0.21875 C 4.21875 -0.21875 4.21875 -0.265625 4.203125 -0.375 Z M 3.171875 -2.953125 L 3.484375 -1.34375 L 2.0625 -1.34375 Z M 3.171875 -2.953125 "/>
+</g>
+<g id="glyph-2-1">
+<path d="M 4.59375 -1.1875 C 4.609375 -1.203125 4.625 -1.25 4.625 -1.265625 C 4.625 -1.296875 4.609375 -1.359375 4.53125 -1.359375 C 4.453125 -1.359375 4.453125 -1.34375 4.390625 -1.21875 C 4.03125 -0.453125 3.75 -0.21875 2.859375 -0.21875 L 1.859375 -0.21875 C 1.8125 -0.21875 1.75 -0.21875 1.703125 -0.234375 C 1.703125 -0.28125 1.703125 -0.28125 1.71875 -0.328125 L 2.046875 -1.640625 L 2.6875 -1.640625 C 3.171875 -1.640625 3.1875 -1.5625 3.1875 -1.40625 C 3.1875 -1.359375 3.1875 -1.3125 3.15625 -1.1875 C 3.15625 -1.171875 3.15625 -1.15625 3.15625 -1.140625 C 3.15625 -1.140625 3.15625 -1.0625 3.25 -1.0625 C 3.328125 -1.0625 3.34375 -1.09375 3.359375 -1.171875 L 3.65625 -2.296875 C 3.65625 -2.3125 3.65625 -2.34375 3.65625 -2.375 C 3.65625 -2.390625 3.640625 -2.453125 3.5625 -2.453125 C 3.46875 -2.453125 3.46875 -2.421875 3.4375 -2.34375 C 3.328125 -1.9375 3.171875 -1.875 2.703125 -1.875 L 2.09375 -1.875 L 2.375 -3 C 2.421875 -3.15625 2.421875 -3.15625 2.625 -3.15625 L 3.59375 -3.15625 C 4.3125 -3.15625 4.515625 -3.046875 4.515625 -2.515625 C 4.515625 -2.453125 4.5 -2.359375 4.5 -2.28125 C 4.5 -2.21875 4.546875 -2.1875 4.609375 -2.1875 C 4.703125 -2.1875 4.703125 -2.234375 4.71875 -2.328125 L 4.796875 -3.21875 L 4.8125 -3.296875 C 4.8125 -3.390625 4.734375 -3.390625 4.640625 -3.390625 L 1.546875 -3.390625 C 1.453125 -3.390625 1.375 -3.390625 1.375 -3.25 C 1.375 -3.15625 1.4375 -3.15625 1.5625 -3.15625 C 1.609375 -3.15625 1.78125 -3.15625 1.875 -3.125 C 1.875 -3.078125 1.875 -3.0625 1.859375 -3 L 1.21875 -0.40625 C 1.171875 -0.265625 1.171875 -0.21875 0.78125 -0.21875 C 0.65625 -0.21875 0.578125 -0.21875 0.578125 -0.078125 C 0.578125 0 0.65625 0 0.75 0 L 3.921875 0 C 4.046875 0 4.046875 0 4.09375 -0.09375 Z M 4.59375 -1.1875 "/>
+</g>
+<g id="glyph-2-2">
+<path d="M 2.890625 -2.96875 C 2.9375 -3.125 2.9375 -3.140625 3.140625 -3.140625 L 3.671875 -3.140625 C 4.234375 -3.140625 4.3125 -2.984375 4.3125 -2.671875 C 4.3125 -2.640625 4.3125 -2.546875 4.265625 -2.3125 L 4.265625 -2.265625 C 4.265625 -2.21875 4.296875 -2.171875 4.375 -2.171875 C 4.46875 -2.171875 4.46875 -2.21875 4.484375 -2.3125 L 4.609375 -3.203125 C 4.625 -3.25 4.625 -3.265625 4.625 -3.28125 C 4.625 -3.359375 4.546875 -3.359375 4.453125 -3.359375 L 0.96875 -3.359375 C 0.828125 -3.359375 0.828125 -3.359375 0.78125 -3.265625 L 0.453125 -2.34375 C 0.453125 -2.328125 0.421875 -2.265625 0.421875 -2.265625 C 0.421875 -2.234375 0.453125 -2.171875 0.53125 -2.171875 C 0.609375 -2.171875 0.625 -2.1875 0.65625 -2.3125 C 0.890625 -2.90625 1.03125 -3.140625 1.703125 -3.140625 L 2.25 -3.140625 C 2.28125 -3.140625 2.359375 -3.140625 2.40625 -3.125 L 2.40625 -3.09375 L 1.734375 -0.4375 C 1.703125 -0.28125 1.6875 -0.21875 1.15625 -0.21875 L 1.046875 -0.21875 C 0.953125 -0.21875 0.9375 -0.21875 0.921875 -0.203125 C 0.890625 -0.171875 0.875 -0.125 0.875 -0.078125 C 0.875 -0.0625 0.890625 0 0.96875 0 C 1.125 0 1.28125 -0.015625 1.4375 -0.015625 C 1.578125 -0.015625 1.734375 -0.015625 1.890625 -0.015625 C 2.046875 -0.015625 2.21875 -0.015625 2.375 -0.015625 C 2.53125 -0.015625 2.6875 0 2.84375 0 C 2.875 0 2.96875 0 2.96875 -0.140625 C 2.96875 -0.21875 2.890625 -0.21875 2.8125 -0.21875 L 2.703125 -0.21875 C 2.5625 -0.21875 2.4375 -0.21875 2.296875 -0.25 C 2.265625 -0.25 2.234375 -0.265625 2.234375 -0.3125 C 2.234375 -0.34375 2.234375 -0.34375 2.25 -0.421875 Z M 2.890625 -2.96875 "/>
+</g>
+<g id="glyph-2-3">
+<path d="M 2.375 -2.984375 C 2.40625 -3.109375 2.4375 -3.140625 2.5625 -3.15625 C 2.703125 -3.1875 2.796875 -3.1875 2.9375 -3.1875 C 3.078125 -3.1875 3.15625 -3.1875 3.15625 -3.3125 C 3.15625 -3.375 3.109375 -3.40625 3.0625 -3.40625 C 2.921875 -3.40625 2.78125 -3.390625 2.65625 -3.390625 C 2.515625 -3.390625 2.375 -3.390625 2.25 -3.390625 C 2.109375 -3.390625 1.984375 -3.390625 1.859375 -3.390625 C 1.75 -3.390625 1.609375 -3.40625 1.5 -3.40625 C 1.46875 -3.40625 1.375 -3.40625 1.375 -3.265625 C 1.375 -3.1875 1.453125 -3.1875 1.5625 -3.1875 C 1.609375 -3.1875 1.78125 -3.1875 1.890625 -3.15625 C 1.890625 -3.09375 1.890625 -3.078125 1.875 -3.03125 L 1.21875 -0.40625 C 1.171875 -0.265625 1.171875 -0.21875 0.796875 -0.21875 C 0.65625 -0.21875 0.578125 -0.21875 0.578125 -0.078125 C 0.578125 0 0.65625 0 0.75 0 L 3.578125 0 C 3.703125 0 3.703125 0 3.75 -0.109375 C 3.796875 -0.25 4.203125 -1.234375 4.203125 -1.265625 C 4.203125 -1.3125 4.171875 -1.359375 4.09375 -1.359375 C 4.015625 -1.359375 4.015625 -1.34375 3.953125 -1.21875 C 3.6875 -0.578125 3.375 -0.21875 2.546875 -0.21875 L 1.859375 -0.21875 C 1.8125 -0.21875 1.75 -0.21875 1.703125 -0.234375 C 1.703125 -0.28125 1.703125 -0.28125 1.71875 -0.328125 Z M 2.375 -2.984375 "/>
+</g>
+<g id="glyph-2-4">
+<path d="M 4.859375 -3.4375 C 4.859375 -3.453125 4.859375 -3.515625 4.78125 -3.515625 C 4.75 -3.515625 4.75 -3.515625 4.6875 -3.453125 L 4.34375 -3.109375 C 4.328125 -3.09375 4.296875 -3.0625 4.28125 -3.0625 C 4.28125 -3.0625 4.265625 -3.078125 4.265625 -3.078125 C 4.15625 -3.1875 3.859375 -3.515625 3.203125 -3.515625 C 1.828125 -3.515625 0.578125 -2.4375 0.578125 -1.34375 C 0.578125 -0.53125 1.265625 0.109375 2.34375 0.109375 C 2.84375 0.109375 3.28125 -0.0625 3.59375 -0.25 C 4.234375 -0.671875 4.296875 -1.203125 4.296875 -1.203125 C 4.296875 -1.28125 4.234375 -1.28125 4.203125 -1.28125 C 4.140625 -1.28125 4.109375 -1.265625 4.09375 -1.21875 C 3.859375 -0.421875 3.03125 -0.109375 2.46875 -0.109375 C 1.875 -0.109375 1.125 -0.359375 1.125 -1.234375 C 1.125 -1.796875 1.421875 -2.375 1.734375 -2.671875 C 2.3125 -3.21875 2.96875 -3.296875 3.28125 -3.296875 C 3.921875 -3.296875 4.328125 -2.875 4.328125 -2.296875 C 4.328125 -2.1875 4.3125 -2.171875 4.3125 -2.140625 C 4.3125 -2.0625 4.375 -2.0625 4.421875 -2.0625 C 4.515625 -2.0625 4.515625 -2.078125 4.546875 -2.171875 Z M 4.859375 -3.4375 "/>
+</g>
+<g id="glyph-2-5">
+<path d="M 2.015625 -1.515625 L 3.109375 -1.515625 C 3.875 -1.515625 4.765625 -1.984375 4.765625 -2.59375 C 4.765625 -3.0625 4.25 -3.40625 3.53125 -3.40625 L 1.5625 -3.40625 C 1.46875 -3.40625 1.390625 -3.40625 1.390625 -3.265625 C 1.390625 -3.1875 1.453125 -3.1875 1.578125 -3.1875 C 1.625 -3.1875 1.796875 -3.1875 1.890625 -3.15625 C 1.890625 -3.09375 1.890625 -3.078125 1.875 -3.03125 L 1.21875 -0.40625 C 1.1875 -0.265625 1.1875 -0.21875 0.796875 -0.21875 C 0.671875 -0.21875 0.59375 -0.21875 0.59375 -0.078125 C 0.59375 -0.046875 0.625 0 0.6875 0 C 0.78125 0 0.90625 -0.015625 1.015625 -0.015625 C 1.140625 -0.015625 1.265625 -0.015625 1.390625 -0.015625 C 1.515625 -0.015625 1.625 -0.015625 1.75 -0.015625 C 1.875 -0.015625 2 0 2.109375 0 C 2.140625 0 2.234375 0 2.234375 -0.140625 C 2.234375 -0.21875 2.15625 -0.21875 2.0625 -0.21875 C 2.046875 -0.21875 1.9375 -0.21875 1.84375 -0.234375 C 1.71875 -0.25 1.71875 -0.25 1.71875 -0.296875 C 1.71875 -0.296875 1.71875 -0.3125 1.734375 -0.359375 Z M 2.375 -3.015625 C 2.421875 -3.171875 2.421875 -3.1875 2.625 -3.1875 L 3.359375 -3.1875 C 3.875 -3.1875 4.21875 -3.046875 4.21875 -2.671875 C 4.21875 -2.515625 4.140625 -2.140625 3.859375 -1.921875 C 3.578125 -1.71875 3.1875 -1.703125 2.984375 -1.703125 L 2.046875 -1.703125 Z M 2.375 -3.015625 "/>
+</g>
+</g>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 0 0 L 340.953125 0 L 340.953125 340.953125 L 0 340.953125 Z M 0 0 "/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip-0)">
+<path fill-rule="nonzero" fill="rgb(95.370483%, 97.059631%, 99.804688%)" fill-opacity="1" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(53.72467%, 70.588684%, 98.039246%)" stroke-opacity="1" stroke-miterlimit="10" d="M 170.081594 0.0004375 C 170.081594 93.934031 93.933156 170.082469 -0.0004375 170.082469 C -93.934031 170.082469 -170.082469 93.934031 -170.082469 0.0004375 C -170.082469 -93.933156 -93.934031 -170.081594 -0.0004375 -170.081594 C 93.933156 -170.081594 170.081594 -93.933156 170.081594 0.0004375 Z M 170.081594 0.0004375 " transform="matrix(1, 0, 0, -1, 170.477, 170.477)"/>
+</g>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-0-0" x="165.89" y="23.644"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(96.508789%, 98.899841%, 96.311951%)" fill-opacity="1" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(65.098572%, 89.019775%, 63.134766%)" stroke-opacity="1" stroke-miterlimit="10" d="M 136.065969 0.0004375 C 136.065969 75.148875 75.148 136.062938 -0.0004375 136.062938 C -75.148875 136.062938 -136.062938 75.148875 -136.062938 0.0004375 C -136.062938 -75.148 -75.148875 -136.065969 -0.0004375 -136.065969 C 75.148 -136.065969 136.065969 -75.148 136.065969 0.0004375 Z M 136.065969 0.0004375 " transform="matrix(1, 0, 0, -1, 170.477, 170.477)"/>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-0-1" x="166.513" y="60.495"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(99.528503%, 95.449829%, 96.586609%)" fill-opacity="1" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(95.292664%, 54.508972%, 65.879822%)" stroke-opacity="1" stroke-miterlimit="10" d="M -36.852 -62.362844 C -36.852 -43.577687 -52.078563 -28.347219 -70.867625 -28.347219 C -89.652781 -28.347219 -104.88325 -43.577687 -104.88325 -62.362844 C -104.88325 -81.148 -89.652781 -96.378469 -70.867625 -96.378469 C -52.078563 -96.378469 -36.852 -81.148 -36.852 -62.362844 Z M -36.852 -62.362844 " transform="matrix(1, 0, 0, -1, 170.477, 170.477)"/>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-0-2" x="89.69" y="236.243"/>
+</g>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-0-3" x="98.780873" y="236.243"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(99.763489%, 98.861694%, 96.862793%)" fill-opacity="1" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(97.645569%, 88.627625%, 68.624878%)" stroke-opacity="1" stroke-miterlimit="10" d="M 104.882375 -62.362844 C 104.882375 -43.577687 89.651906 -28.347219 70.86675 -28.347219 C 52.081594 -28.347219 36.851125 -43.577687 36.851125 -62.362844 C 36.851125 -81.148 52.081594 -96.378469 70.86675 -96.378469 C 89.651906 -96.378469 104.882375 -81.148 104.882375 -62.362844 Z M 104.882375 -62.362844 " transform="matrix(1, 0, 0, -1, 170.477, 170.477)"/>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-0-4" x="231.422" y="236.243"/>
+</g>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-0-3" x="240.51088" y="236.243"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(97.9599%, 96.508789%, 99.685669%)" fill-opacity="1" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(79.606628%, 65.098572%, 96.862793%)" stroke-opacity="1" stroke-miterlimit="10" d="M 70.86675 28.348094 C 70.86675 67.484813 39.140187 99.215281 -0.0004375 99.215281 C -39.141063 99.215281 -70.867625 67.484813 -70.867625 28.348094 C -70.867625 -10.792531 -39.141063 -42.519094 -0.0004375 -42.519094 C 39.140187 -42.519094 70.86675 -10.792531 70.86675 28.348094 Z M 70.86675 28.348094 " transform="matrix(1, 0, 0, -1, 170.477, 170.477)"/>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-0-3" x="165.101" y="145.534"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(95.803833%, 98.861694%, 98.353577%)" fill-opacity="1" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(58.036804%, 88.627625%, 83.529663%)" stroke-opacity="1" stroke-miterlimit="10" d="M -36.852 14.172313 C -36.852 22.000438 -43.19575 28.348094 -51.023875 28.348094 C -58.852 28.348094 -65.199656 22.000438 -65.199656 14.172313 C -65.199656 6.344188 -58.852 0.0004375 -51.023875 0.0004375 C -43.19575 0.0004375 -36.852 6.344188 -36.852 14.172313 Z M -36.852 14.172313 " transform="matrix(1, 0, 0, -1, 170.477, 170.477)"/>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="112.825" y="158.185"/>
+</g>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-2-0" x="120.422" y="159.187"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(99.804688%, 97.019958%, 95.292664%)" fill-opacity="1" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(98.039246%, 70.196533%, 52.938843%)" stroke-opacity="1" stroke-miterlimit="10" d="M 65.198781 14.172313 C 65.198781 22.000438 58.851125 28.348094 51.023 28.348094 C 43.194875 28.348094 36.851125 22.000438 36.851125 14.172313 C 36.851125 6.344188 43.194875 0.0004375 51.023 0.0004375 C 58.851125 0.0004375 65.198781 6.344188 65.198781 14.172313 Z M 65.198781 14.172313 " transform="matrix(1, 0, 0, -1, 170.477, 170.477)"/>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="212.236" y="158.185"/>
+</g>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-2-0" x="219.834" y="159.187"/>
+<use xlink:href="#glyph-2-1" x="224.995125" y="159.187"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(99.607849%, 97.605896%, 99.058533%)" fill-opacity="1" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(96.076965%, 76.075745%, 90.586853%)" stroke-opacity="1" stroke-miterlimit="10" d="M -14.172313 -14.171437 C -14.172313 -6.347219 -20.519969 0.0004375 -28.348094 0.0004375 C -36.176219 0.0004375 -42.519969 -6.347219 -42.519969 -14.171437 C -42.519969 -21.999562 -36.176219 -28.347219 -28.348094 -28.347219 C -20.519969 -28.347219 -14.172313 -21.999562 -14.172313 -14.171437 Z M -14.172313 -14.171437 " transform="matrix(1, 0, 0, -1, 170.477, 170.477)"/>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="135.578" y="186.532"/>
+</g>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-2-2" x="143.175" y="187.534"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(99.528503%, 97.724915%, 93.725586%)" fill-opacity="1" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(78.115845%, 70.899963%, 54.899597%)" stroke-opacity="1" stroke-miterlimit="10" d="M 42.519094 -14.171437 C 42.519094 -6.347219 36.175344 0.0004375 28.347219 0.0004375 C 20.519094 0.0004375 14.175344 -6.347219 14.175344 -14.171437 C 14.175344 -21.999562 20.519094 -28.347219 28.347219 -28.347219 C 36.175344 -28.347219 42.519094 -21.999562 42.519094 -14.171437 Z M 42.519094 -14.171437 " transform="matrix(1, 0, 0, -1, 170.477, 170.477)"/>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="192.396" y="186.532"/>
+</g>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-2-3" x="199.993" y="187.534"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(93.017578%, 97.802734%, 92.626953%)" fill-opacity="1" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(52.076721%, 71.21582%, 50.509644%)" stroke-opacity="1" stroke-miterlimit="10" d="M -34.016063 48.187938 C -34.016063 56.016063 -40.359813 62.363719 -48.187938 62.363719 C -56.016063 62.363719 -62.363719 56.016063 -62.363719 48.187938 C -62.363719 40.359813 -56.016063 34.016063 -48.187938 34.016063 C -40.359813 34.016063 -34.016063 40.359813 -34.016063 48.187938 Z M -34.016063 48.187938 " transform="matrix(1, 0, 0, -1, 170.477, 170.477)"/>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="113.01" y="124.17"/>
+</g>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-2-0" x="120.607" y="125.172"/>
+<use xlink:href="#glyph-2-4" x="125.768125" y="125.172"/>
+</g>
+<path fill-rule="nonzero" fill="rgb(99.058533%, 90.90271%, 93.174744%)" fill-opacity="1" stroke-width="0.79701" stroke-linecap="butt" stroke-linejoin="miter" stroke="rgb(76.235962%, 43.606567%, 52.703857%)" stroke-opacity="1" stroke-miterlimit="10" d="M 62.362844 48.187938 C 62.362844 56.016063 56.019094 62.363719 48.190969 62.363719 C 40.362844 62.363719 34.015187 56.016063 34.015187 48.187938 C 34.015187 40.359813 40.362844 34.016063 48.190969 34.016063 C 56.019094 34.016063 62.362844 40.359813 62.362844 48.187938 Z M 62.362844 48.187938 " transform="matrix(1, 0, 0, -1, 170.477, 170.477)"/>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-1-0" x="209.5" y="124.17"/>
+</g>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-2-5" x="217.098" y="125.172"/>
+</g>
+<g fill="rgb(11.764526%, 11.764526%, 18.03894%)" fill-opacity="1">
+<use xlink:href="#glyph-2-2" x="222.320395" y="125.172"/>
+</g>
+</svg>
+</div>
+<hr />
+<p>Now let’s define sets of <strong>aggregate states</strong> that a molecule can have:</p>
+<ul>
+<li>Gas form: \(GF\)</li>
+<li>Liquid form: \(LF\)</li>
+<li>Solid form: \(SF\)</li>
+</ul>
+<p>$$
+GF \subset K \quad ;\quad LF \subset K \quad ; \quad SF \subset K
+$$</p>
+<div align="center">
+<img src="mol_category/./pictures/form.png">
+</div>
+<p>For example, the molecule \(\mathsf{H_2O}\) is in all three subsets:</p>
+<p>$$
+\mathsf{H_2O} \in GF \cap LF \cap SF
+$$</p>
+<p>Which means that it can exist in all three physical states.</p>
+<hr />
+<p>We also define a function that maps each molecule to a tuple of its elements:</p>
+<p>$$
+\mathbb{E} : K \to \bigcup_{k=1}^\infty E^k
+$$</p>
+<p>Examples:</p>
+<p>$$
+\mathbb{E}(\mathsf{H_2O}) = (\mathsf{H}, \mathsf{H}, \mathsf{O})
+$$</p>
+<p>$$
+\mathbb{E}(\mathsf{O_2}) = (\mathsf{O}, \mathsf{O})
+$$</p>
+<p>There’s another version of this function:</p>
+<p>$$
+\mathbb{E} : \mathcal{P}(K) \to \bigcup_{k=1}^\infty E^k
+$$</p>
+<p>And it can be defined as:</p>
+<p>$$
+\mathbb{E}(x \in \mathcal{P}(K)) = \bigcup_{k \in x} \mathbb{E}(k)
+$$</p>
+<p>Since objects from \(\mathbf{Mol}\) are mapped to singleton sets (e.g., \(F(H_2O) = \{H_2O\}\)), and those are elements of \(\mathcal{P}(K)\), we can write:</p>
+<p>$$
+\mathbb{E}(F(\mathsf{H_2O})) = (\mathsf{H}, \mathsf{H}, \mathsf{O}), \quad \mathsf{H_2O} \in \mathbf{Mol}
+$$</p>
+<p>Or:</p>
+<p>$$
+\mathbb{E}(\{ \mathsf{H_2O}, \mathsf{O_2} \}) = \mathbb{E}(\mathsf{H_2O}) \cup \mathbb{E}(\mathsf{O_2}) = (\mathsf{H}, \mathsf{H}, \mathsf{O}, \mathsf{O}, \mathsf{O})
+$$</p>
+<h3 id="molar-mass"><a class="header" href="#molar-mass">Molar Mass</a></h3>
+<p>We define a function for <strong>molar mass</strong>:</p>
+<p>$$
+M : E \to \mathbb{R}^+
+$$</p>
+<p>Example:</p>
+<p>$$
+M(\mathsf{O}) = 16
+$$</p>
+<p>We also define:</p>
+<p>$$
+M : K \to \mathbb{R}^+
+$$</p>
+<p>This function is calculated as:</p>
+<p>$$
+M(k \in K) = \sum_{e \in \mathbb{E}(k)} M(e)
+$$</p>
+<p>Example for \(\mathsf{O_2}\):</p>
+<p>$$
+M(\mathsf{O_2}) = M(O) + M(O) = 32
+$$</p>
+<p>And one more variant:</p>
+<p>$$
+M : \mathcal{P}(K) \to \mathbb{N}
+$$</p>
+<p>$$
+M(x \in \mathcal{P}(K)) = \sum_{e \in x} M(e)
+$$</p>
+<p>So we can write:</p>
+<p>$$
+M(F(\mathsf{O_2})) = M(\mathsf{O}) + M(\mathsf{O}) = 32, \quad \mathsf{O_2} \in \mathbf{Mol}
+$$</p>
+<p>$$
+M(\{ \mathsf{H_2O}, \mathsf{O_2} \}) = M(\mathsf{H_2O}) + M(\mathsf{O_2}) = M(\mathsf{H}) + M(\mathsf{H}) + M(\mathsf{O}) + M(\mathsf{O}) + M(\mathsf{O}) = 50
+$$</p>
+<h3 id="atomic-number-number-of-protons"><a class="header" href="#atomic-number-number-of-protons">Atomic Number (Number of Protons)</a></h3>
+<p>A function assigning the atomic number:</p>
+<p>$$
+Z : E \to \mathbb{N}
+$$</p>
+<p>$$
+Z(\mathsf{N}) = 7
+$$</p>
+<p>Examples:</p>
+<p>$$
+\mathsf{O} \mapsto 8, \quad \mathsf{Ni} \mapsto 28, \quad \mathsf{Ti} \mapsto 22, \dots
+$$</p>
+<h3 id="group-number"><a class="header" href="#group-number">Group Number</a></h3>
+<p>Function mapping an element to its group:</p>
+<p>$$
+G : E \to \mathbb{N}
+$$</p>
+<p>$$
+G(\mathsf{Co}) = 9
+$$</p>
+<h3 id="period-number"><a class="header" href="#period-number">Period Number</a></h3>
+<p>Function mapping an element to its period:</p>
+<p>$$
+P : E \to \mathbb{N}
+$$</p>
+<p>$$
+P(\mathsf{K}) = 4
+$$</p>
+<h3 id="relative-atomic-mass"><a class="header" href="#relative-atomic-mass">Relative Atomic Mass</a></h3>
+<p>Function for relative atomic mass:</p>
+<p>$$
+Ar : E \to \mathbb{R}^+
+$$</p>
+<p>$$
+Ar(\mathsf{H}) = 1.008
+$$</p>
+<h3 id="mass-number"><a class="header" href="#mass-number">Mass Number</a></h3>
+<p>Function mapping to the <strong>mass number</strong>:</p>
+<p>$$
+A : E \to \mathbb{R}^+
+$$</p>
+<h3 id="number-of-neutrons"><a class="header" href="#number-of-neutrons">Number of Neutrons</a></h3>
+<p>Function for computing number of neutrons:</p>
+<p>$$
+N : E \to \mathbb{R}^+
+$$</p>
+<p>$$
+N(e) = A(e) - Z(e), \quad e \in E
+$$</p>
+<h3 id="molecule-names"><a class="header" href="#molecule-names">Molecule Names</a></h3>
+<p>Recall that in \(\mathbf{Mol}\), molecules are <strong>unnamed</strong> and purely abstract. The names are given separately using the set \(Names\), e.g.:</p>
+<p>$$
+\mathsf{H_2O} \in Names
+$$</p>
+<p>Even uncommon names like:</p>
+<p>$$
+\mathsf{OH_2} \in Names
+$$</p>
+<p>We define:</p>
+<p>$$
+Name : K \to \mathcal{P}(Names)
+$$</p>
+<p>This lets us abstract away from names — so there’s no confusion whether "water" means \(\mathsf{H_2O}\), \(\mathsf{OH_2}\), or both:</p>
+<p>$$
+Name(▲) = \{ \mathsf{H_2O}, \ \mathsf{OH_2}, \ \dots \}
+$$</p>
+<p>In this case, \(▲\) stands for <strong>water</strong> as an abstract object — the concept behind the names.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="description-1"><a class="header" href="#description-1">Description</a></h1>
+<p>Mol language is a language for describing chemical reactions. If you want to emphasize that the file you have written was written in Mol language, you can add the file extension: <code>example.mol</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="syntax"><a class="header" href="#syntax">Syntax</a></h1>
+<h2 id="writing-molecules"><a class="header" href="#writing-molecules">Writing Molecules</a></h2>
+<p>Mol is a case-sensitive language. This means that how you write the names of molecules is very important. The Mol server (which processes Mol code) splits each molecule into atoms and checks whether those atoms are valid (i.e., whether they exist at all). The lexer treats any sequence that starts with an uppercase letter followed by optional lowercase letters as an atom.</p>
+<p>Let’s look at the notation <code>2FeCl3</code>:</p>
+<ul>
+<li><code>2</code>: the initial number is completely ignored.</li>
+<li><code>Fe</code>: this will be recognized as an atom, because it starts with an uppercase letter followed by lowercase letters. If you wrote <code>FE</code> instead, it would be interpreted as two atoms: <code>F</code> and <code>E</code>. But at some point, the server would return an error saying that the atom <code>E</code> does not exist.</li>
+<li><code>Cl</code>: this will also be interpreted as an atom.</li>
+<li><code>3</code>: indicates that there are three <code>Cl</code> atoms in the molecule. This value is taken into account.</li>
+</ul>
+<h2 id="writing-reactions"><a class="header" href="#writing-reactions">Writing Reactions</a></h2>
+<p>The syntax of the language is very simple. All reactions can be written in the following format:</p>
+<pre><code>List of reactants -&gt; List of products
+</code></pre>
+<p>You can list molecules using either <code>+</code> or <code>,</code>: <code>NaOH + HCl</code> or <code>NaOH, HCl</code>. You can also use parentheses for clarity: <code>(NaOH + HCl)</code> or <code>(NaOH, HCl)</code>. Here’s what a complete reaction might look like:</p>
+<pre><code class="language-mol">NaOH + HCl -&gt; H2O
+</code></pre>
+<p>You can also use <code>;</code> to write multiple reactions in a single line:</p>
+<pre><code class="language-mol">NaOH + HCl -&gt; H2O ; CuO + H2 -&gt; Cu + H2O
+</code></pre>
+<p>For convenience, you can use the <code>_</code> character, which is completely ignored by the language. Here are a few examples: <code>H_2O</code>, <code>H_2_O</code>, <code>K_2SO_4</code>.</p>
+<h2 id="comments"><a class="header" href="#comments">Comments</a></h2>
+<p>The language supports both block and line comments:</p>
+<pre><code class="language-mol">// comment
+
+/*
+comment
+*/
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="example"><a class="header" href="#example">Example</a></h1>
+<pre><code class="language-mol">CH3 + 2O2 -&gt; CO2 + 2H2O ; NaOH + HCl -&gt; NaCl
+NaOH + HCl -&gt; H2O
+
+(2H2O2) -&gt; 2H2O + O2
+
+
+(Zn, HCl) -&gt; ZnCl_2
+H2 + Cl2 -&gt; 2HCl
+2H2 + O2 -&gt; 2H2O
+2Na + Cl2 -&gt; 2NaCl
+CaCO3 -&gt; CaO + CO2
+
+// just random comment lol
+
+Fe + S -&gt; FeS
+2K + 2H2O -&gt; 2KOH + H2
+Zn + 2HCl -&gt; ZnCl2 + H2
+CuO + H2 -&gt; Cu + H2O
+2Na + 2H2O -&gt; 2NaOH + H2
+CaOH2 + CO2 -&gt; CaCO3 + H2O
+NH3 + HCl -&gt; NH4Cl
+2Fe + 3Cl2 -&gt; 2FeCl3
+P + 5Cl2 -&gt; PCl5
+3Mg + N2 -&gt; Mg3N2
+C + O2 -&gt; CO2
+C + O2 -&gt; CO
+CO + O2 -&gt; CO2
+
+NaOH + HCl -&gt; NaCl + H2O
+H2SO4 + 2KOH -&gt; K2SO4 + 2H2O
+NH3 + H2O -&gt; NH4 + OH
+CH3COOH + NaOH -&gt; CH3COONa + H2O
+H2CO3 + CaOH2 -&gt; CaCO3 + 2H2O
+HNO3 + NH3 -&gt; NH4NO3
+
+Zn + CuSO4 -&gt; ZnSO4 + Cu
+Fe + CuCl2 -&gt; FeCl2 + Cu
+
+// i don't understand chemistry btw :D
+
+2FeCl3 + H2S -&gt; 2FeCl2 + 2HCl + S
+2KMnO4 + 5H2C2O4 + 6H -&gt; 2Mn2 + 10CO2 + 8H2O + 2K
+H2O2 + 2KI + H2SO4 -&gt; I2 + 2H2O + K2SO4
+2Na + 2H2O -&gt; 2NaOH + H2
+Cl2 + 2NaI -&gt; 2NaCl + I2
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="commands"><a class="header" href="#commands">Commands:</a></h1>
+<ul>
+<li><a href="./import.html">import</a> - imports a file or stirng of mol code.</li>
+<li><a href="./products.html">products</a> - outputs products that can be obtained from the provided list of molecules.</li>
+<li><a href="./reagents.html">reagents</a> - outputs the reagents needed to obtain the molecule specified in the argument.</li>
+<li><a href="./url.html">url</a> - displays or edits the current address to the Mol server.</li>
+<li><a href="./completions.html">completions</a> - adds auto-completions to your Shell.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-completions-command"><a class="header" href="#the-completions-command">The <code>completions</code> command</a></h1>
+<p>The completions command is used to generate auto-completions for some common shells. This means when you type <code>mol</code> in your shell, you can then press your shell’s auto-complete key (usually the Tab key) and it may display what the valid options are, or finish partial input.</p>
+<p>The completions first need to be installed for your shell:</p>
+<pre><code class="language-bash"># bash
+mol completions bash &gt; ~/.local/share/bash-completion/completions/mol
+
+# oh-my-zsh
+mol completions zsh &gt; ~/.oh-my-zsh/completions/_mol
+
+autoload -U compinit &amp;&amp; compinit
+</code></pre>
+<p>The command prints a completion script for the given shell. Run <code>mol completions --help</code> for a list of supported shells.</p>
+<p>Where to place the completions depend on which shell you are using and your operating system. Consult your shell’s documentation for more information one where to place the script.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-url-command"><a class="header" href="#the-url-command">The <code>url</code> Command</a></h1>
+<p>The <code>url</code> command manages the <code>url</code> value in the configuration file located at <code>~/.config/mol.toml</code>. You can also modify this value manually. The configuration file is created on first launch and contains <code>http://localhost:8080</code> as the default value, since it's assumed that you'll be running the server manually.</p>
+<pre><code class="language-toml">url = "http://localhost:8080"
+</code></pre>
+<p>To check the currently used URL, use the <code>-o</code> flag:</p>
+<pre><code class="language-bash">mol url -o
+</code></pre>
+<p>This will simply output the URL: <code>http://localhost:8080</code>.</p>
+<p>To set a new value, run the command without any flags and pass the new address:</p>
+<pre><code class="language-bash">mol url 'http://localhost:8081'
+</code></pre>
+<hr />
+<p>You can also run <code>mol url --help</code> for a quick usage summary.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-import-command"><a class="header" href="#the-import-command">The <code>import</code> Command</a></h1>
+<p>The <code>import</code> command sends Mol code to the Mol server, after which the server updates the graph of molecular reactions.</p>
+<h2 id="importing-a-file"><a class="header" href="#importing-a-file">Importing a File</a></h2>
+<p>You can import files with the <code>.mol</code> extension, as described in the section on the <a href="./mol_language.html">Mol language</a>. To do this, use the <code>-f</code> option:</p>
+<pre><code class="language-bash">mol import -f example.mol
+</code></pre>
+<h2 id="importing-a-manually-written-string"><a class="header" href="#importing-a-manually-written-string">Importing a Manually Written String</a></h2>
+<p>You can also import <a href="./mol_language.html">Mol code</a> without creating a file:</p>
+<pre><code class="language-bash">mol import -s 'CH3 + 2O2 -&gt; CO2 + 2H2O ; NaOH + HCl -&gt; NaCl'
+</code></pre>
+<h2 id="standard-input"><a class="header" href="#standard-input">Standard Input</a></h2>
+<p>You can also use stdin, which can be useful for scripts:</p>
+<pre><code class="language-bash">echo "CH3 + 2O2 -&gt; CO2 + 2H2O ; NaOH + HCl -&gt; NaCl" | mol import
+</code></pre>
+<pre><code class="language-bash">cat example.mol | mol import
+</code></pre>
+<hr />
+<p>You can also combine all methods:</p>
+<pre><code class="language-bash">cat example.mol | mol import -f example2.mol -s 'CH3 + 2O2 -&gt; CO2 + 2H2O'
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-products-command"><a class="header" href="#the-products-command">The <code>products</code> Command</a></h1>
+<p>The <code>products</code> command displays a list of reactions that are possible using the molecules passed as arguments. Essentially, it means: "show the products I can obtain using these molecules together, assuming I might need one additional component."</p>
+<p>In this overview, I’ll be using the <a href="./mol_example.html">example Mol document from earlier sections</a>. Your output may differ if you <a href="./import.html">import</a> more data.</p>
+<p>Here’s an example for water:</p>
+<pre><code class="language-bash">mol products H2O
+</code></pre>
+<p>Output:</p>
+<pre><code>[NH3, H2O] -&gt; OH
+[H2O, NH3] -&gt; NH4
+[H2O, Na] -&gt; H2
+[H2O, Na] -&gt; NaOH
+[H2O, K] -&gt; H2
+[H2O, K] -&gt; KOH
+</code></pre>
+<p>Here’s another example for sodium:</p>
+<pre><code>mol products Na
+</code></pre>
+<p>Output:</p>
+<pre><code>[H2O, Na] -&gt; H2
+[H2O, Na] -&gt; NaOH
+[Cl2, Na] -&gt; NaCl
+</code></pre>
+<p>Some of these reactions also involve water. Let’s try querying the products that can be made from both water and sodium:</p>
+<pre><code>mol products Na H2O
+</code></pre>
+<p>Output:</p>
+<pre><code>[H2O, Na] -&gt; H2
+[H2O, Na] -&gt; NaOH
+</code></pre>
+<p>As you can see, the <code>products</code> command only returns reactions that involve <strong>all</strong> of the molecules passed as arguments (in this case, <code>H2O</code> and <code>Na</code>). If there were a reaction involving three reactants like <code>H2O + Na + x -&gt; ...</code>, it would also be listed.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-reagents-command"><a class="header" href="#the-reagents-command">The <code>reagents</code> Command</a></h1>
+<p>The <code>reagents</code> command displays a list of reactants required to produce the specified molecule passed as an argument. It’s essentially like saying, “give me the reactions that can produce this molecule.”</p>
+<p>In this overview, I’ll be using the <a href="./mol_example.html">example Mol document from earlier sections</a>. Your output may differ if you <a href="./import.html">import</a> more data.</p>
+<p>Example for water:</p>
+<pre><code class="language-bash">mol reagents H2O
+</code></pre>
+<p>Output:</p>
+<pre><code>[H2SO4, KI, H2O2] -&gt; H2O
+[KMnO4, H, H2C2O4] -&gt; H2O
+[H2CO3, CaOH2] -&gt; H2O
+[CH3COOH, NaOH] -&gt; H2O
+[H2SO4, KOH] -&gt; H2O
+[CO2, CaOH2] -&gt; H2O
+[CuO, H2] -&gt; H2O
+[H2, O2] -&gt; H2O
+[H2O2] -&gt; H2O
+[NaOH, HCl] -&gt; H2O
+[O2, CH3] -&gt; H2O
+</code></pre>
+<p>Example for <code>CO2</code>:</p>
+<pre><code>[KMnO4, H2C2O4, H] -&gt; CO2
+[O2, CO] -&gt; CO2
+[C, O2] -&gt; CO2
+[CaCO3] -&gt; CO2
+[O2, CH3] -&gt; CO2
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
