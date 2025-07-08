@@ -1,9 +1,7 @@
 [![Spring](https://img.shields.io/badge/Spring-a6e3a1?style=for-the-badge&logo=spring&labelColor=1e1e2e&logoColor=a6e3a1)](https://spring.io/)
 [![neo4j](https://img.shields.io/badge/neo4j-89b4fa?style=for-the-badge&logo=neo4j&logoColor=cdd6f4&labelColor=1e1e2e)](https://neo4j.com/)
 
-[**Documentation is also available in Russian!!!**](ru/README.md)
-
-[**Documentation is also available in German!!!**](de/README.md)
+**[More detailed documentation](https://andylocks.github.io/Mol/en/book/index.html)** is also available, which is also [available in Russian language](https://andylocks.github.io/Mol/ru/book/index.html).
 
 # Molecular Reaction Server
 
@@ -136,18 +134,4 @@ Once the server is running locally, you can view the reaction graph by navigatin
 
 ## CLI
 
-The CLI is still under development, but already functional. It simplifies usage and allows you to communicate with the server more easily:
-
-```sh
-./mol products O2 CO
-```
-
-```sh
-./mol reagents S
-```
-
-```sh
-./mol import ./example.mol
-```
-
-Located in the `mol_cli` directory.
+CLI documentation is available in [more detailed documentation](https://andylocks.github.io/Mol/en/book/index.html), which is also [available in Russian.](https://andylocks.github.io/Mol/ru/book/index.html)
