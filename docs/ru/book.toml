@@ -8,4 +8,4 @@ title = "Mol"
 git-repository-url = "https://github.com/AndyLocks/Mol"
 git-repository-icon = "fa-github"
 mathjax-support = true
-edit-url-template = "https://github.com/AndyLocks/Mol/edit/master/docs/ru/src/{path}"
+edit-url-template = "https://github.com/AndyLocks/Mol/edit/master/docs/ru/{path}"
