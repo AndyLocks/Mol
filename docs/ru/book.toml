@@ -1,0 +1,10 @@
+[book]
+authors = ["AndyLocks"]
+language = "ru"
+src = "src"
+title = "Mol"
+
+[output.html]
+git-repository-url = "https://github.com/AndyLocks/Mol"
+git-repository-icon = "fa-github"
+mathjax-support = true

@@ -1,0 +1,447 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Категория Mol - Mol</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Mol</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/AndyLocks/Mol" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="Категория-молекулярных-реакций"><a class="header" href="#Категория-молекулярных-реакций">Категория молекулярных реакций</a></h1>
+<p>Это мультрикатегория \(\mathbf{Mol}\), в которой все объекты — это молекулы, которые в рамках этой категории не имеют имен или каких-то обозначений. Это некие абстрактные молекулы, без имен, но все же для удобства мы будем их называть обычными именами, например \(\mathsf{H_2O}\). Позже, рассматривая функторы мы опишем имена молекул отдельной структурой. Поэтому сейчас можно сказать что-то на подобии этого:</p>
+<p>$$
+Ob(\mathbf{Mol}) = \{\mathsf{H_2O}, \mathsf{O_2}, \mathsf{NaOH}, \dots\}
+$$</p>
+<p>Но стоит учитывать, что назвать молекулы вы можете как угодно, например буквами или фигурами, или ограничится самым абстрактным пониманием объекта. Но пока для удобства будем называть молекулы привычными именами.</p>
+<h2 id="Морфизмы"><a class="header" href="#Морфизмы">Морфизмы</a></h2>
+<p>Морфизмы в этой категории — это обобщения для реакций, причем нас не интересует, сколько именно молекул участвуют в реакции и в какой именно реакции (сгорание, замещение, окисление). Мы концентрируемся только на том, из каких молекул вообще возможно получить какие и не важно каким образом. Возможно мы еще не открыли определенные реакции для получение неких молекул, но уже оперируем ими так, будто есть несколько способов получить из одних молекул другие (например реакцией из будущего или композицией существующих). Также как и в морфизмах \(\mathbf{Set}\), где один и тот же переход из одного множества в другое может быть описан бесконечно огромным количеством функций.
+За этими абстракциями (морфизмами) скрывается обычная химия с обычными уравнениями, которые имеют такой же смысл, как и функции в категории \(\mathbf{Set}\).</p>
+<p>Давайте рассмотрим пару примеров:</p>
+<h3 id="1-Реакция-горения-метана-органическая-реакция-окисления"><a class="header" href="#1-Реакция-горения-метана-органическая-реакция-окисления">1. Реакция горения метана (органическая реакция окисления):</a></h3>
+<p><strong>Химическое уравнение:</strong></p>
+<p>$$
+\mathsf{CH_3(g) + 2O_2(g) \rightarrow CO_2(g) + 2H_2O(g)}
+$$</p>
+<p><strong>Морфизмы:</strong></p>
+<p>$$
+f_1 : (\mathsf{CH_3}, \mathsf{O_2}) \to  \mathsf{CO_2}
+$$</p>
+<p>$$
+f_2 : (\mathsf{CH_3}, \mathsf{O_2}) \to  \mathsf{H_2O}
+$$</p>
+<p><strong>Тип реакции:</strong> Окислительно-восстановительная (горение), экзотермическая.</p>
+<p><strong>Объяснение:</strong> Как видите, у этой реакции есть два морфизма. Это обусловлено тем, что у реакции есть два продукта. Для удобной композиции лучше завести два морфизма, чем один с двумя результатами. Также, как вы можете заметить, мы игнорируем количество молекул (вместо \(\mathsf{2H_2O}\) мы оперируем \(\mathsf{H_2O}\)). На данном уровне абстракции мы не думаем об этом. Мы оперируем морфизмами как фактами возможности реакции.</p>
+<hr />
+<h3 id="2-Реакция-нейтрализации-гидроксид-натрия--соляная-кислота"><a class="header" href="#2-Реакция-нейтрализации-гидроксид-натрия--соляная-кислота">2. Реакция нейтрализации: гидроксид натрия + соляная кислота:</a></h3>
+<p><strong>Химическое уравнение:</strong></p>
+<p>$$
+\mathsf{NaOH(aq) + HCl(aq) \rightarrow NaCl(aq) + H_2O(l)}
+$$</p>
+<p><strong>Морфизмы:</strong></p>
+<p>$$
+f_1 : (\mathsf{NaOH}, \mathsf{HCl}) \to  \mathsf{NaCl}
+$$</p>
+<p>$$
+f_2 : (\mathsf{NaOH}, \mathsf{HCl}) \to  \mathsf{H_2O}
+$$</p>
+<p><strong>Тип реакции:</strong> Обменная, нейтрализация, экзотермическая.</p>
+<hr />
+<h3 id="3-Реакция-разложения-пероксида-водорода"><a class="header" href="#3-Реакция-разложения-пероксида-водорода">3. Реакция разложения пероксида водорода:</a></h3>
+<p><strong>Химическое уравнение:</strong></p>
+<p>$$
+\mathsf{2H_2O_2(aq) \rightarrow 2H_2O(l) + O_2(g)}
+$$</p>
+<p><strong>Морфизмы:</strong></p>
+<p>$$
+f_1 : \mathsf{H_2O_2} \to  \mathsf{H_2O}
+$$
+$$
+f_2 : \mathsf{H_2O_2} \to  \mathsf{O_2}
+$$</p>
+<p><strong>Тип реакции:</strong> Разложение, окислительно-восстановительная.</p>
+<hr />
+<h3 id="4-Реакция-замещения-цинк--соляная-кислота"><a class="header" href="#4-Реакция-замещения-цинк--соляная-кислота">4. Реакция замещения: цинк + соляная кислота:</a></h3>
+<p><strong>Химическое уравнение:</strong></p>
+<p>$$
+\mathsf{Zn(s) + 2HCl(aq) \rightarrow ZnCl_2(aq) + H_2(g)}
+$$</p>
+<p><strong>Морфизмы:</strong></p>
+<p>$$
+f_1 : (\mathsf{Zn}, \mathsf{HCl}) \to  \mathsf{ZnCl_2}
+$$</p>
+<p>$$
+f_2 : (\mathsf{Zn}, \mathsf{HCl}) \to  \mathsf{H_2}
+$$</p>
+<p><strong>Тип реакции:</strong> Замещение, окислительно-восстановительная.</p>
+<hr />
+<h3 id="5-Термическое-разложение-карбоната-кальция"><a class="header" href="#5-Термическое-разложение-карбоната-кальция">5. Термическое разложение карбоната кальция:</a></h3>
+<p><strong>Химическое уравнение:</strong></p>
+<p>$$
+\mathsf{CaCO_3(s) \xrightarrow{Δ} CaO(s) + CO_2(g)}
+$$</p>
+<p><strong>Морфизмы:</strong></p>
+<p>$$
+f_1 : \mathsf{CaCO_3} \to \mathsf{CaO}
+$$</p>
+<p>$$
+f_2 : \mathsf{CaCO_3} \to \mathsf{CO_2}
+$$</p>
+<p><strong>Тип реакции:</strong> Разложение.</p>
+<h2 id="Тождественные-морфизмы"><a class="header" href="#Тождественные-морфизмы">Тождественные морфизмы</a></h2>
+<p>Каждый объект имеет свой тождественный морфизм:</p>
+<p>$$
+\forall o \in \mathrm{Ob}(\mathbf{Mol}) \  : \ \mathrm{id}_o \in \mathrm{Hom}_{\mathbf{Mol}}(o, o)
+$$</p>
+<p>Например:</p>
+<p>$$
+id_{H_2O} : H_2O \to H_2O
+$$</p>
+<p>$$
+id_{O_2} : O_2 \to O_2
+$$
+Чаще всего, это означает, что элемент просто покоится и ничего не происходит. Но иногда это может означать изменение агрегатного состояния, например:</p>
+<p>$$
+\mathsf{Br_{2(g)}} \to \mathsf{Br_{2(l)}} \to \mathsf{Br_{2(s)}}
+$$</p>
+<p>Но поскольку мы абстрагируемся от количества молекул а также от хода реакции и концентрируемся только на участниках и факте реакции, мы игнорируем это, так как в ходе этой реакции мы все равно получим одну и ту же молекулу:</p>
+<p>$$
+id_{Br_2} : Br_2 \to Br_2
+$$</p>
+<h2 id="Композиция"><a class="header" href="#Композиция">Композиция</a></h2>
+<p>Пусть у нас есть морфизм:</p>
+<p>$$
+f : (A_1, A_2, ..., A_n) \to B
+$$</p>
+<p>и для каждого \(A_i\) есть морфизмы:</p>
+<p>$$
+g_i : (B_{i1}, B_{i2}, ..., B_{im_i}) \to A_i
+$$</p>
+<p>Тогда мы можем составить композицию:</p>
+<p>$$
+f \circ (g_1, ..., g_n) : (B_{11}, ..., B_{1m_1}, ..., B_{n1}, ..., B_{nm_n}) \to B
+$$</p>
+<p>Например:</p>
+<p>\(f: (A, B) \to C\)</p>
+<p>\(g: (D, E) \to A\)</p>
+<p>Тогда можно составить:</p>
+<p>$$
+f \circ (g, id_B) : (D, E) \to C
+$$</p>
+<p>Вот еще один пример:</p>
+<p>Давайте попробуем доказать такую реакцю:</p>
+<p>$$
+(\mathsf{CH_3}, \mathsf{O_2}) \to \mathsf{NaOH}
+$$</p>
+<p>В теории, мы бы могли бы уже ей пользоваться так, будто она возможна, но давайте представим, что нам сейчас важно понять, из каких других реакций может состоять эта? Во первых, давайте найдем реакцию, которая дает \(\mathsf{NaOH}\)):</p>
+<p>$$
+\mathsf{Na_2O} + \mathsf{H_2O} \rightarrow \mathsf{2NaOH}
+$$</p>
+<p>Отсюда можно сразу вывести морфизм:</p>
+<p>$$
+f : (\mathsf{Na_2O}, \ \mathsf{H_2O}) \to  \mathsf{NaOH}
+$$</p>
+<p>Теперь нам нужна реакция дающая воду. Для получения воды мы можем использовать эту реакцию:</p>
+<p>$$
+\mathsf{CH_3(g) + 2O_2(g) \rightarrow CO_2(g) + 2H_2O(g)}
+$$</p>
+<p>Для этого нам всего нужно два элемента, поэтому отсюда можно вывести морфизм:</p>
+<p>$$
+g : (\mathsf{CH_3}, \mathsf{O_2}) \to  \mathsf{H_2O}
+$$</p>
+<p>Скорее всего, если вывести огромную компьютерную модель всевозможных реакций и композиций, нам даже не придется думать об реакциях, но для ясности, мы их будем рассматривать. И вот мы уже можем вывести композицию:</p>
+<p>$$
+f \circ (id_{\mathbf{Na_2O}}, \ g) : (\mathsf{CH_3}, \mathsf{O_2}) \to \mathsf{NaOH}
+$$</p>
+<p>Давайте снова возьмем морфизм \(f\):</p>
+<p>$$
+f : (\mathsf{Na_2O}, \ \mathsf{H_2O}) \to  \mathsf{NaOH}
+$$</p>
+<p>И подумаем, а какие еще композиции можно вывести? По сути, это количество способов вывести \(\mathsf{H_2O}\) \(\times\) количество способов вывести \(\mathsf{Na_2O}\). Мы уже знаем пару способов вывести \(\mathsf{H_2O}\) из упомянутых выше реакций:</p>
+<p>$$
+g_1 : \mathsf{H_2O_2} \to  \mathsf{H_2O}
+$$</p>
+<p>$$
+g_2 : (\mathsf{NaOH}, \ \mathsf{HCl}) \to  \mathsf{H_2O}
+$$
+$$
+g_3 : (\mathsf{CH_3}, \ \mathsf{O_2}) \to  \mathsf{H_2O}
+$$</p>
+<p>Используя это мы можем выводить новые композиции:</p>
+<p>$$
+f \circ (id_{\mathbf{Na_2O}}, \ g_1) : \mathsf{H_2O_2} \to \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (id_{\mathbf{Na_2O}}, \ g_2) : (\mathsf{NaOH}, \ \mathsf{HCl}) \to  \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (id_{\mathbf{Na_2O}}, \ g_3) : (\mathsf{CH_3}, \ \mathsf{O_2}) \to  \mathsf{NaOH}
+$$</p>
+<p>Теперь, давайте выведем несколько способов получения \(\mathsf{Na_2O}\):</p>
+<p>$$
+4\mathsf{Na} + \mathsf{O_2} \rightarrow \mathsf{2Na_2O}
+$$
+$$
+\mathsf{2Na_2O_2} \xrightarrow{t} \mathsf{2Na_2O} + \mathsf{O_2}
+$$</p>
+<p>А также переведем эти реакции в нужные нам морфизмы:</p>
+<p>$$
+h_1 : (\mathsf{Na}, \ \mathsf{O_2}) \to \mathsf{Na_2O}
+$$</p>
+<p>$$
+h_2 : \mathsf{Na_2O_2} \to \mathsf{Na_2O}
+$$</p>
+<p>И сделать из них новую композицию:</p>
+<p>$$
+f \circ (h_1, \ g_1) : (\mathsf{Na}, \ \mathsf{O_2}, \  \mathsf{H_2O_2}) \to \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (h_1, \ g_2) : (\mathsf{Na}, \ \mathsf{O_2}, \  \mathsf{NaOH}, \ \mathsf{HCl}) \to  \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (h_1, \ g_3) : (\mathsf{Na}, \ \mathsf{CH_3}, \ \mathsf{O_2}) \to  \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (h_2, \ g_1) : (\mathsf{Na_2O_2}, \ \mathsf{H_2O_2}) \to \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (h_2, \ g_2) : (\mathsf{Na_2O_2}, \ \mathsf{NaOH}, \ \mathsf{HCl}) \to  \mathsf{NaOH}
+$$</p>
+<p>$$
+f \circ (h_2, \ g_3) : (\mathsf{Na_2O_2}, \ \mathsf{CH_3}, \ \mathsf{O_2}) \to  \mathsf{NaOH}
+$$</p>
+<hr />
+<p>Давайте еще раз рассмотрим морфизмы \(h_1\) и \(h_2\):</p>
+<p>$$
+h_1 : (\mathsf{Na}, \ \mathsf{O_2}) \to \mathsf{Na_2O}
+$$</p>
+<p>$$
+h_2 : \mathsf{Na_2O_2} \to \mathsf{Na_2O}
+$$</p>
+<p>Тут примечательно то, что из \(\mathsf{Na}\) и \(\mathsf{O_2}\) мы можем получить \(\mathsf{Na_2O_2}\) в ходе реакции:</p>
+<p>$$
+\mathsf{2Na + O_2} \to \mathsf{Na_2O_2}
+$$</p>
+<p>Это значит, что существует морфизм:</p>
+<p>$$
+k: (\mathsf{Na}, \ \mathsf{O_2}) \to \mathsf{Na_2O_2}
+$$</p>
+<p>А это значит, что морфизм \(h_1\) может быть описан композицией:</p>
+<p>$$
+h_2 \circ k : (\mathsf{Na}, \ \mathsf{O_2}) \to \mathsf{Na_2O}
+$$</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../mol_category/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../mol_category/set.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../mol_category/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../mol_category/set.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
