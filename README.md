@@ -134,4 +134,4 @@ Once the server is running locally, you can view the reaction graph by navigatin
 
 ## CLI
 
-CLI documentation is available in [more detailed documentation](https://andylocks.github.io/Mol/en/book/index.html), which is also [available in Russian.](https://andylocks.github.io/Mol/ru/book/index.html)
+CLI documentation is available in [more detailed documentation](https://andylocks.github.io/Mol/en/book/commands.html), which is also [available in Russian.](https://andylocks.github.io/Mol/ru/book/commands.html)
