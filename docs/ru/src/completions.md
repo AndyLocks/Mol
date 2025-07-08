@@ -6,10 +6,10 @@
 
 ```bash
 # bash
-mol completions bash > ~/.local/share/bash-completion/completions/mdbook
+mol completions bash > ~/.local/share/bash-completion/completions/mol
 
 # oh-my-zsh
-mol completions zsh > ~/.oh-my-zsh/completions/_mdbook
+mol completions zsh > ~/.oh-my-zsh/completions/_mol
 
 autoload -U compinit && compinit
 ```
