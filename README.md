@@ -135,3 +135,9 @@ Once the server is running locally, you can view the reaction graph by navigatin
 ## CLI
 
 CLI documentation is available in [more detailed documentation](https://andylocks.github.io/Mol/en/book/commands.html), which is also [available in Russian.](https://andylocks.github.io/Mol/ru/book/commands.html)
+
+---
+
+<p align="center">
+	<a href="https://github.com/AndyLocks/Mol?tab=GPL-3.0-1-ov-file#readme"><img src="https://img.shields.io/badge/GPL-cba6f7?style=for-the-badge&label=license&labelColor=1e1e2e"></a>
+</p>
