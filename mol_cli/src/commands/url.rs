@@ -10,19 +10,22 @@ pub fn execute(url: Option<String>, output: bool) -> Result<(), Box<dyn StdError
         return Ok(());
     }
 
-    if url.is_none() {
-        Error::raw(
-            ErrorKind::MissingRequiredArgument,
-            "Url is required without -o flag",
-        )
-        .exit();
+    match url {
+        Some(url) => {
+            let mut cfg: Config = confy::load("mol", "mol").expect("Cannot load config");
+
+            cfg.url = url;
+
+            confy::store("mol", "mol", &cfg).expect("Cannot store config");
+
+            Ok(())
+        }
+        None => {
+            Error::raw(
+                ErrorKind::MissingRequiredArgument,
+                "Url is required without -o flag",
+            )
+            .exit();
+        }
     }
-
-    let mut cfg: Config = confy::load("mol", "mol").expect("Cannot load config");
-
-    cfg.url = url.expect("Url cannot be null");
-
-    confy::store("mol", "mol", &cfg).expect("Cannot store config");
-
-    Ok(())
 }

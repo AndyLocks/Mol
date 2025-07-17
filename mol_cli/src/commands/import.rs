@@ -14,7 +14,7 @@ pub fn execute(
     let url = format!("{}/import", CONFIG.deref().url.clone());
 
     if file.is_some() {
-        let file = file.expect("File path cannot be null");
+        let file = file.unwrap();
 
         let file_name = file
             .file_name()
@@ -29,7 +29,7 @@ pub fn execute(
     }
 
     if script.is_some() {
-        let script = script.expect("Script cannot be null");
+        let script = script.unwrap();
 
         let part = multipart::Part::text(script)
             .file_name("mol.mol")
